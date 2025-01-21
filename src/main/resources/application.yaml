@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/chessdb
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  application:
+    name: M(I)EMCHESS
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
