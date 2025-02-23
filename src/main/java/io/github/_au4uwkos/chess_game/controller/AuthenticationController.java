@@ -4,11 +4,16 @@ import io.github._au4uwkos.chess_game.model.Role;
 import io.github._au4uwkos.chess_game.model.UserEntity;
 import io.github._au4uwkos.chess_game.repository.RoleRepository;
 import io.github._au4uwkos.chess_game.repository.UserRepository;
+import io.github._au4uwkos.chess_game.transfer.LoginTransfer;
 import io.github._au4uwkos.chess_game.transfer.RegisterTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/auth")
@@ -33,6 +39,23 @@ public class AuthenticationController {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginTransfer loginTransfer) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginTransfer.getUsername(),
+                            loginTransfer.getPassword()
+                    )
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return ResponseEntity.ok("User signed in successfully!");
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
+    }
+
 
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterTransfer registerTransfer) {
