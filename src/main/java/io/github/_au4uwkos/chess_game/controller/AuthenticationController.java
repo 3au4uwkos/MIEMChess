@@ -4,6 +4,8 @@ import io.github._au4uwkos.chess_game.model.Role;
 import io.github._au4uwkos.chess_game.model.UserEntity;
 import io.github._au4uwkos.chess_game.repository.RoleRepository;
 import io.github._au4uwkos.chess_game.repository.UserRepository;
+import io.github._au4uwkos.chess_game.security.JWTGenerator;
+import io.github._au4uwkos.chess_game.transfer.AuthResponseTransfer;
 import io.github._au4uwkos.chess_game.transfer.LoginTransfer;
 import io.github._au4uwkos.chess_game.transfer.RegisterTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collections;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/auth")
@@ -31,29 +32,34 @@ public class AuthenticationController {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private JWTGenerator jwtGenerator;
 
     @Autowired
-    public AuthenticationController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public AuthenticationController(AuthenticationManager authenticationManager,
+                                    UserRepository userRepository,
+                                    RoleRepository roleRepository,
+                                    PasswordEncoder passwordEncoder,
+                                    JWTGenerator jwtGenerator) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtGenerator = jwtGenerator;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginTransfer loginTransfer) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginTransfer.getUsername(),
-                            loginTransfer.getPassword()
-                    )
-            );
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            return ResponseEntity.ok("User signed in successfully!");
-        } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-        }
+    public ResponseEntity<AuthResponseTransfer> login(@RequestBody LoginTransfer loginTransfer) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginTransfer.getUsername(),
+                        loginTransfer.getPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtGenerator.generateToken(authentication);
+        return new ResponseEntity<>(new AuthResponseTransfer(token), HttpStatus.OK);
+
     }
 
 
