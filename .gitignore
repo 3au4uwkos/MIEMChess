@@ -172,4 +172,5 @@ target
 .gradle
 README.html
 .exercism
-*.yaml
+
+src/main/resources/application.yaml
