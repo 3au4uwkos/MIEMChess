@@ -27,10 +27,18 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        if (request.getRequestURI().matches("^/auth/(register|login)$")) {
+        if (request.getRequestURI().matches("^/auth/(register|login)$")
+        || request.getRequestURI().matches("^/(register|login)$")) {
             filterChain.doFilter(request, response);
             return;
         }
+
+        if (request.getRequestURI().matches("^/(register|login|flavicon)$")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        System.out.println(request.getRequestURI());
 
         String token = getJWTFromRequest(request);
         if (StringUtils.hasText(token) & jwtValidator.validateToken(token)) {
