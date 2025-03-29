@@ -1,5 +1,6 @@
 package io.github._au4uwkos.chess_game.security;
 
+import io.github._au4uwkos.chess_game.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

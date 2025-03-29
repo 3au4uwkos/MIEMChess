@@ -1,11 +1,16 @@
 package io.github._au4uwkos.chess_game.repository;
 
 import io.github._au4uwkos.chess_game.model.UserEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import reactor.core.publisher.Mono;
 
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    <S extends UserEntity> Optional<S> findByUsername(String username);
-    Boolean existsByUsername(String username);
+
+public interface UserRepository extends ReactiveCrudRepository<UserEntity, Integer> {
+    @Query("SELECT * FROM users WHERE username = :username")
+    Mono<UserEntity> findByUsername(String username);
+
+    @Query("SELECT EXISTS (SELECT 1 FROM users WHERE usersname = :username)")
+    Mono<Boolean> existsByUsername(String username);
 }

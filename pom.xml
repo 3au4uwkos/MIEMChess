@@ -25,10 +25,10 @@
 
 	<!-- Зависимости проекта -->
 	<dependencies>
-		<!-- Основной стартовый набор для работы с Spring Boot -->
+		<!-- Основной стартовый набор для работы с Spring Boot WebFlux -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
 		<!-- Spring Security для аутентификации и авторизации -->
@@ -37,11 +37,14 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<!-- Hibernate + JPA для работы с базой данных -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>3.4.2</version>
+			<artifactId>spring-data-r2dbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>r2dbc-postgresql</artifactId>
+			<version>1.0.7.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -108,10 +111,8 @@
 
 	</dependencies>
 
-	<!-- Настройки сборки проекта -->
 	<build>
 		<plugins>
-			<!-- Настройка Maven Compiler Plugin для компиляции с Lombok -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -137,11 +138,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- Spring Boot Maven Plugin для создания JAR-файла -->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 		</plugins>
 	</build>
 </project>
