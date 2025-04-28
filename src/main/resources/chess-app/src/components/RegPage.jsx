@@ -1,10 +1,9 @@
 import React from "react";
 import '../RegPage.css';
-
+import { useNavigate } from "react-router-dom";
 
 const RegPage = () => {
-
-
+    const navigate = useNavigate();
     return (
         <div className="RegPage">
             <div className="UpperRegPage">
@@ -16,7 +15,7 @@ const RegPage = () => {
             </div>
 
             <div className="contentBlocksReg">
-                {/* Левая часть */}
+
                 <div className="leftBlockReg">
                     <h1>
                         ЭТО <br />
@@ -30,7 +29,7 @@ const RegPage = () => {
                     </p>
                 </div>
 
-                {/* Правая часть */}
+
                 <div className="rightBlockReg">
                     <h2>
                         <span className="highlighted">ЗАПОЛНИТЕ</span> ДАННЫЕ<br /> ПОЛЬЗОВАТЕЛЯ
@@ -51,7 +50,7 @@ const RegPage = () => {
 
                     <div className="authBlock">
                         <p className="authText">Уже есть аккаунт?</p>
-                        <span className="authLink" >Войти</span>
+                        <span className="authLink" onClick={() => navigate("/")}>Войти</span>
                     </div>
                 </div>
             </div>

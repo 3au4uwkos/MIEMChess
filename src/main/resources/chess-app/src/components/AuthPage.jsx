@@ -1,7 +1,8 @@
 import React from "react";
 import '../AuthPage.css';
-
+import { useNavigate } from "react-router-dom";
 const AuthPage = () => {
+    const navigate = useNavigate();
     return (
         <div className="AuthPage">
             <div className="UpperAuthPage">
@@ -13,7 +14,7 @@ const AuthPage = () => {
             </div>
 
             <div className="contentBlocks">
-                {/* Левая часть */}
+
                 <div className="leftBlock">
                     <h1>
                         ЭТО <br />
@@ -27,7 +28,7 @@ const AuthPage = () => {
                     </p>
                 </div>
 
-                {/* Правая часть */}
+
                 <div className="rightBlock">
                     <h2>
                         <span className="highlighted">ВОЙДИТЕ</span>, <br /> ЧТОБЫ ИГРАТЬ
@@ -45,7 +46,7 @@ const AuthPage = () => {
 
                     <div className="registerBlock">
                         <p className="registerText">Еще нет аккаунта?</p>
-                        <span className="registerLink">Зарегистрироваться</span>
+                        <span className="registerLink" onClick={() => navigate("/Registration")}>Зарегистрироваться</span>
                     </div>
                 </div>
             </div>
