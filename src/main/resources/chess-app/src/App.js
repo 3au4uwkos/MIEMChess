@@ -3,14 +3,19 @@ import AuthPage from './components/AuthPage.jsx';
 import RegPage from './components/RegPage.jsx';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
+import MainPage from "./components/MainPage.jsx";
+const App = () => {
   return (
-      <Router>
+      <div className="MainPage">
+          <MainPage/>
+      </div>
+      /*<Router>
           <Routes>
               <Route path="/" element={<AuthPage />} />
               <Route path="/Registration" element={<RegPage />} />
           </Routes>
-      </Router>
+      </Router>*/
+
   );
 }
 
