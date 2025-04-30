@@ -2,9 +2,13 @@
     font-family: "Russo One";
     src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
 }
+@font-face {
+    font-family: "AKONY";
+    src: url("../../../public/fonts/AKONY.ttf") format("truetype");
+}
 
 .MainPage {
-    overflow: hidden;
+
     background-color: #000000;
     color: white;
     min-height: 100vh;
@@ -12,38 +16,43 @@
     height: 100vh;
 }
 
+.highlighted {
+    color: #FE6D00;
+}
+
+/*  исправлено позиционирование заголовка и обертки */
 .MainPageHeader {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 30px 0;
+    flex-direction: column; /* ← поменяли на колонку */
+    align-items: flex-start; /* ← теперь всё слева и с отступами */
+    margin: 50px 50px;
+    font-family: "AKONY";
 }
 
 .MainPageTitle {
-    font-size: 36px;
-    font-weight: bold;
+    font-size: 44px; /* ← увеличил размер */
+
     margin-bottom: 20px;
+    margin-left: 20px; /* ← отступ вправо */
 }
 
+/*  Кнопка под заголовком */
 .MainPageButton {
     background-color: #0F47AD;
     color: white;
     border: none;
-    padding: 14px 30px;
-    border-radius: 12px;
-    font-size: 18px;
+    padding: 20px 100px;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: "AKONY";
+    margin-left: 120px; /* ← выравниваем с заголовком */
 }
 
 .MainPageButton:hover {
     background-color: #FE6D00;
-}
-
-/* Можно закинуть базовые отступы для блоков */
-.MPBlock {
-    background-color: #1B1B1B;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 20px;
 }

@@ -12,7 +12,9 @@ const MainPage = () => {
             <MPNavbar />
 
             <div className="MainPageHeader">
-                <h1 className="MainPageTitle">Время побеждать</h1>
+                <h1 className="MainPageTitle">
+                    Время <span className="highlighted"><br />побеждать</span>
+                </h1>
                 <button className="MainPageButton">В бой</button>
             </div>
             <MPLeaders />
