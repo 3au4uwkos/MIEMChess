@@ -4,8 +4,14 @@ import "./MPUserStats.css";
 const MPUserStats = () => {
     return (
         <div className="MPUserStats">
-            <h2>Персональная статистика</h2>
-            {/* Здесь будут данные */}
+            <div className="MPUserStatsTitle">
+                <h2>
+                    Персональная <span className="highlighted"><br />статистика</span>
+                </h2>
+            </div>
+            <div className="MPUserStatsBody">
+
+            </div>
         </div>
     );
 };

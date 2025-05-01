@@ -4,8 +4,14 @@ import "./MPLastGame.css";
 const MPLastGame = () => {
     return (
         <div className="MPLastGame">
-            <h2>Last Game</h2>
-            {/* Пока пустой */}
+            <div className="MPLastGameTitle">
+                <h2>
+                    Последняя <span className="highlighted"><br />игра</span>
+                </h2>
+            </div>
+            <div className="MPLastGameBody">
+                {/* здесь можешь добавить содержимое позже */}
+            </div>
         </div>
     );
 };
