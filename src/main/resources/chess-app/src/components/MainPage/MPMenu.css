@@ -7,7 +7,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    gap: 20px;
+
 }
 
 .MPMenuButton {
@@ -51,7 +51,7 @@
 .MPMenuDropdownContent a img {
     width: 15px;
     height: 15px;
-    margin-right: 4px;
+
     vertical-align: middle;
 }
 .MPMenuDropdownButton {

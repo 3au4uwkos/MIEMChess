@@ -2,57 +2,72 @@
     font-family: "Russo One";
     src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
 }
+
 @font-face {
     font-family: "AKONY";
     src: url("../../../public/fonts/AKONY.ttf") format("truetype");
 }
 
 .MainPage {
-
+    overflow: hidden;
     background-color: #000000;
-    color: white;
     min-height: 100vh;
     width: 100vw;
-    height: 100vh;
+    color: white;
+    display: grid;
+    grid-template-areas:
+    "navbar navbar"
+    "header leaders"
+    "userstats lastgame";
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+
 }
 
 .highlighted {
     color: #FE6D00;
 }
 
-/*  исправлено позиционирование заголовка и обертки */
+/* Заголовок и кнопка — колонкой, отступы внутри */
 .MainPageHeader {
     display: flex;
-    flex-direction: column; /* ← поменяли на колонку */
-    align-items: flex-start; /* ← теперь всё слева и с отступами */
-    margin: 50px 50px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 50px;
     font-family: "AKONY";
+    grid-area: header;
 }
 
 .MainPageTitle {
-    font-size: 44px; /* ← увеличил размер */
-
+    font-size: 44px;
     margin-bottom: 20px;
-    margin-left: 20px; /* ← отступ вправо */
 }
 
-/*  Кнопка под заголовком */
 .MainPageButton {
     background-color: #0F47AD;
     color: white;
     border: none;
     padding: 20px 100px;
     border-radius: 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
     font-size: 24px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-family: "AKONY";
-    margin-left: 120px; /* ← выравниваем с заголовком */
 }
 
 .MainPageButton:hover {
     background-color: #FE6D00;
+}
+.MPLeaders{
+    grid-area: leaders;
+}
+.MPUserStats {
+    grid-area: userstats;
+}
+.MPLastGame{
+    grid-area: lastgame;
+}
+.MPNavbar{
+    grid-area: navbar;
 }
