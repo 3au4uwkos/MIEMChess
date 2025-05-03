@@ -20,7 +20,7 @@
     "header leaders"
     "userstats lastgame";
     grid-template-columns: 2fr 1fr;
-    gap: 20px;
+    gap: 10px;
     align-items: start;
 
 }

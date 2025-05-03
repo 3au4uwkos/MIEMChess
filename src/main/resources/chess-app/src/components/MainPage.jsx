@@ -1,6 +1,5 @@
 import React from "react";
 import MPNavbar from "./MainPage/MPNavbar";
-import MPMenu from "./MainPage/MPMenu";
 import MPLeaders from "./MainPage/MPLeaders";
 import MPLastGame from "./MainPage/MPLastGame";
 import MPUserStats from "./MainPage/MPUserStats";
@@ -10,7 +9,6 @@ const MainPage = () => {
     return (
         <div className="MainPage">
             <MPNavbar />
-
             <div className="MainPageHeader">
                 <h1 className="MainPageTitle">
                     Время <span className="highlighted"><br />побеждать</span>

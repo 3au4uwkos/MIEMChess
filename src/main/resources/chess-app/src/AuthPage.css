@@ -17,6 +17,7 @@
     overflow: hidden;
     padding: 6vh 6vw;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .contentBlocks {
@@ -139,5 +140,12 @@
     font-family: "Russo One", sans-serif;
     color: #fe6d00;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 1vh;
+    margin-top: -2vh;
+
 }
