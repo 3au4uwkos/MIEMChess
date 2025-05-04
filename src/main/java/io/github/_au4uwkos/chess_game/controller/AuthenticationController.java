@@ -23,26 +23,26 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public Mono<ResponseEntity<AuthResponseTransfer>> login(@RequestBody AuthRequestTransfer authRequest) {
         return userService.findByUsername(authRequest.getUsername())
-                .map(userDetails -> {
+                .<ResponseEntity<AuthResponseTransfer>>handle((userDetails, sink) -> {
                     if (userDetails.getPassword().equals(authRequest.getPassword())) {
-                        return ResponseEntity.ok(new AuthResponseTransfer(jwtUtil.generateToken(authRequest.getUsername())));
+                        sink.next(ResponseEntity.ok(new AuthResponseTransfer(jwtUtil.generateToken(authRequest.getUsername()))));
                     } else {
-                        throw new BadCredentialsException("Invalid username or password");
+                        sink.error(new BadCredentialsException("Invalid username or password"));
                     }
                 }).switchIfEmpty(Mono.error(new BadCredentialsException("Invalid username or password")));
     }
-    @PostMapping("/signup")
+    @PostMapping("/api/signup")
     public Mono<ResponseEntity<String>> signup(@RequestBody UserEntity user) {
         // Encrypt password before saving
         user.setPassword(user.getPassword());
         return userService.save(user)
-                .map(savedUser -> ResponseEntity.ok("User signed up successfully"));
+                .map(_ -> ResponseEntity.ok("User signed up successfully"));
     }
 
-    @GetMapping("/protected")
+    @GetMapping("/api/protected")
     public Mono<ResponseEntity<String>> protectedEndpoint() {
         return Mono.just(ResponseEntity.ok("You have accessed a protected endpoint!"));
     }

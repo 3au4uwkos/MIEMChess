@@ -27,11 +27,12 @@ public class JWTAuthenticationManager implements ReactiveAuthenticationManager {
         String username = jwtUtil.extractUsername(token);
 
         return userService.findByUsername(username)
-                .map(userDetails -> {
+                .handle((userDetails, sink) -> {
                     if (jwtUtil.validateToken(token, userDetails.getUsername())) {
-                        return authentication;
+                        sink.next(authentication);
                     } else {
-                        throw new AuthenticationException("Invalid JWT token") {};
+                        sink.error(new AuthenticationException("Invalid JWT token") {
+                        });
                     }
                 });
     }
