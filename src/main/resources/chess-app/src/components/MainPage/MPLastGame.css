@@ -10,16 +10,16 @@
 .MPLastGame {
     display: flex;
     flex-direction: column; /* элементы по вертикали */
-    align-items: center;     /* центрируем по горизонтали */
+    align-items: left;     /* центрируем по горизонтали */
 
 }
 
 .MPLastGameTitle {
-    margin-bottom: 10px;
+
 }
 
 .MPLastGameTitle h2 {
-    text-align: right;
+    text-align: left;
     font-family: 'AKONY';
     font-size: 24px;
 }

@@ -6,7 +6,10 @@ import MainPage from "./components/MainPage.jsx";
 
 const App = () => {
   return (
-      <div className="MainPage">
+      <div className="App">
+          <MainPage />
+      </div>
+      /*<div className="MainPage">
       <Router>
           <Routes>
               <Route path="/" element={<AuthPage />} />
@@ -14,7 +17,7 @@ const App = () => {
           </Routes>
       </Router>
       </div>
-
+*/
   );
 }
 
