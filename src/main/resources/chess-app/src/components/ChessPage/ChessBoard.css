@@ -1,0 +1,30 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 250px);
+    grid-template-rows: repeat(8, 250px);
+
+}
+
+.cell {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cell.light {
+    background-color: #ffffff;
+}
+
+.cell.dark {
+    background-color: #0F47AD;
+}
+
+.figure {
+    width: 240px;
+    height: 240px;
+}
+
+

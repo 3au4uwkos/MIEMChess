@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_2_1_"
+   x="0px"
+   y="0px"
+   viewBox="0 0 81 81"
+   style="enable-background:new 0 0 81 81;"
+   xml:space="preserve"
+   sodipodi:docname="white_king.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs9" /><sodipodi:namedview
+   id="namedview9"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   inkscape:zoom="9.6666667"
+   inkscape:cx="40.5"
+   inkscape:cy="40.5"
+   inkscape:window-width="1920"
+   inkscape:window-height="1001"
+   inkscape:window-x="-9"
+   inkscape:window-y="-9"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_2_1_" />
+<style
+   type="text/css"
+   id="style1">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:none;}
+	.st2{fill:#CFCECF;}
+</style>
+<polygon
+   class="st0"
+   points="31,23 31,17.5 39.6,18.6 37.8,10.8 43.2,10.8 41.4,18.6 50,17.5 50,23 41.3,20.4 44.7,33.2 40.5,39.2   36.3,33.2 39.7,20.4 "
+   id="polygon1" />
+<path
+   class="st0"
+   d="M19,69.8v-5.9c13.3-3.1,29.6-3.1,42.9,0v5.9H19z"
+   id="path1" />
+<path
+   class="st0"
+   d="M62.4,61.2L62.4,61.2c-13.7-3-30.1-3-43.6,0.1l-0.1-0.1c-7.2-6-10.5-12.1-10.5-19.8C8.2,33,14.9,28,21.4,28  c5.8,0,9.8,1.9,12.7,6l6.5,9.4l6.5-9.4c2.9-4.1,6.9-6,12.7-6C66.3,28,73,33,73,41.4C72.9,49.2,69.6,55.3,62.4,61.2z"
+   id="path2" />
+<rect
+   class="st1"
+   width="81"
+   height="81"
+   id="rect2" />
+<g
+   id="g8">
+	<path
+   class="st2"
+   d="M19,61.9l-0.4-0.3c7-1.6,14.7-2.4,21.9-2.4V42.7l-6.2-8.2c0-0.1-0.1-0.1-0.2-0.2c-0.6,5.2-2.8,11.5-5.7,15.9   C25,55.5,19.4,59.9,18,61c0.1,0.1,0.2,1,0.3,1.1L19,61.9C19,62,19,61.9,19,61.9z"
+   id="path3"
+   style="fill:#0f47ad;fill-opacity:1" />
+	<path
+   class="st2"
+   d="M 46.6,59.8 63,62.5 v -0.7 l 0.5,-0.4 c 7.4,-5.9 10.7,-12 10.7,-19.6 0,-5.4 -2.9,-9.4 -6.7,-11.5 3,12.6 -9.6,28.3 -20.9,29.5 z"
+   id="path4"
+   style="fill:#fe6d00;fill-opacity:1"
+   sodipodi:nodetypes="ccccscc" />
+	<polygon
+   class="st2"
+   points="53.1,69.8 61.8,69.8 61.8,62.4 53.1,60.6  "
+   id="polygon4"
+   style="fill:#0f47ad;fill-opacity:1" />
+	<polygon
+   class="st2"
+   points="50.5,16.6 48.2,20.5 41.1,20.3 49.5,23.6 50.5,23.6  "
+   id="polygon5"
+   style="fill:#0f47ad;fill-opacity:1" />
+	<polygon
+   class="st2"
+   points="43.1,11.3 40.5,13 40.5,19.2 42.1,18.2  "
+   id="polygon6"
+   style="fill:#fe6d00;fill-opacity:1" />
+	<polygon
+   class="st2"
+   points="41.8,21.5 41.8,33.2 40.5,40.2 45,34  "
+   id="polygon7"
+   style="fill:#fe6d00;fill-opacity:1" />
+	<polygon
+   class="st2"
+   points="39.7,20.4 30.5,20.6 30.5,24.2  "
+   id="polygon8"
+   style="fill:#0f47ad;fill-opacity:1" />
+</g>
+<polygon
+   points="36.4,51.2 40.5,57.2 44.6,51.2 40.5,45.2 "
+   id="polygon9"
+   style="fill-rule:nonzero" />
+<path
+   d="M59.7,25.6c-5.8,0-10.3,1.8-13.5,5.5l-2.1-7.8l7.8,2.4V15.2l-8,1l1.7-7.5H35.3l1.7,7.5l-8-1v10.4l7.8-2.4L34.7,31  c-3.2-3.7-7.7-5.5-13.5-5.5c-7.7,0-15.7,5.9-15.7,15.9c0,8.4,3.4,15,10.9,21.3v9.4h47.9v-9.4c7.5-6.4,10.9-13,10.9-21.3  C75.4,31.5,67.4,25.6,59.7,25.6z M31,23v-5.5l8.6,1.1l-1.8-7.8h5.4l-1.8,7.8l8.6-1.1V23l-8.7-2.6l3.4,12.8l-4.2,6l-4.2-6l3.4-12.8  L31,23z M19,69.8v-5.9c13.3-3.1,29.6-3.1,42.9,0v5.9H19z M62.4,61.2L62.4,61.2c-13.7-3-30.1-3-43.6,0.1l-0.1-0.1  c-7.2-6-10.5-12.1-10.5-19.8C8.2,33,14.9,28,21.4,28c5.8,0,9.8,1.9,12.7,6l6.5,9.4l6.5-9.4c2.9-4.1,6.9-6,12.7-6  C66.3,28,73,33,73,41.4C72.9,49.2,69.6,55.3,62.4,61.2z"
+   id="path9" />
+</svg>
