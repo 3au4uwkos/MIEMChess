@@ -1,61 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-
-<svg
-   version="1.1"
-   id="Layer_1"
-   x="0px"
-   y="0px"
-   viewBox="0 0 81 81"
-   style="enable-background:new 0 0 81 81;"
-   xml:space="preserve"
-   sodipodi:docname="white_rook.svg"
-   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><defs
-   id="defs2" /><sodipodi:namedview
-   id="namedview2"
-   pagecolor="#505050"
-   bordercolor="#eeeeee"
-   borderopacity="1"
-   inkscape:showpageshadow="0"
-   inkscape:pageopacity="0"
-   inkscape:pagecheckerboard="0"
-   inkscape:deskcolor="#505050"
-   inkscape:zoom="9.6666667"
-   inkscape:cx="40.5"
-   inkscape:cy="40.5"
-   inkscape:window-width="1920"
-   inkscape:window-height="1001"
-   inkscape:window-x="-9"
-   inkscape:window-y="-9"
-   inkscape:window-maximized="1"
-   inkscape:current-layer="Layer_1" />
-<style
-   type="text/css"
-   id="style1">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 81 81" style="enable-background:new 0 0 81 81;" xml:space="preserve">
+<style type="text/css">
 	.st0{fill:#FFFFFF;}
 	.st1{fill:#CFCECF;}
 	.st2{fill:none;}
 </style>
-<polygon
-   class="st0"
-   points="58.7,59.4 55.5,32.1 64.1,23.9 64.1,23.9 64.1,12.8 53,12.8 53,20.9 46.3,20.9 46.3,12.8 34.7,12.8   34.7,20.9 28,20.9 28,12.8 16.9,12.8 16.9,23.9 25.5,32.1 22.3,59.4 15.7,59.4 15.7,71 19.8,71 61.1,71 61.2,71 65.3,71 65.3,59.4   "
-   id="polygon1" />
-<path
-   class="st1"
-   d="M 58.5,59.7 54.3,32.5 h 2.2 l 7.6,-8.6 V 12.8 l -5.8,4.6 v 8.2 H 32 l 11.6,6.9 h 3.2 C 46.8,44.6 44,53.8 35.1,59.7 H 48.4 V 70 h 16 V 59.7 Z"
-   id="path1"
-   style="fill:#0f47ad;fill-opacity:1"
-   sodipodi:nodetypes="cccccccccccccccc" />
-<path
-   d="M59.1,58.1l-2.6-24.8l8.7-9V11.5H51.8v8.2h-4.2v-8.2H33.5v8.2h-4.2v-8.2H15.6v12.9l8.7,9l-2.6,24.8l0,0h-7.3v14.1h51.8V72  l0,0h0.2V58.1H59.1z M36,22.2V14h9v8.2h9.2V14h8.5v9.3L54.4,32H26.5l-8.4-8.6V14h8.6v8.2H36z M54,34.4l2.6,23.7H24.3l2.6-23.7H54z   M56.9,60.6H60h4v9.1H17v-9.1h4.8H24H56.9z"
-   id="path2" />
-<rect
-   class="st2"
-   width="81"
-   height="81"
-   id="rect2" />
+<polygon class="st0" points="58.7,59.4 55.5,32.1 64.1,23.9 64.1,23.9 64.1,12.8 53,12.8 53,20.9 46.3,20.9 46.3,12.8 34.7,12.8 
+	34.7,20.9 28,20.9 28,12.8 16.9,12.8 16.9,23.9 25.5,32.1 22.3,59.4 15.7,59.4 15.7,71 19.8,71 61.1,71 61.2,71 65.3,71 65.3,59.4 
+	"/>
+<path class="st1" d="M58.5,59.7l-4.2-27.2h2.2l7.6-8.6V12.8l-5.8,4.6v8.2H32l11.6,6.9h3.2c0,12.1-2.8,21.3-11.7,27.2h13.3V70h16
+	V59.7H58.5z"/>
+<path d="M59.1,58.1l-2.6-24.8l8.7-9V11.5H51.8v8.2h-4.2v-8.2H33.5v8.2h-4.2v-8.2H15.6v12.9l8.7,9l-2.6,24.8l0,0h-7.3v14.1h51.8V72
+	l0,0h0.2V58.1H59.1z M36,22.2V14h9v8.2h9.2V14h8.5v9.3L54.4,32H26.5l-8.4-8.6V14h8.6v8.2H36z M54,34.4l2.6,23.7H24.3l2.6-23.7H54z
+	 M56.9,60.6H60h4v9.1H17v-9.1h4.8H24H56.9z"/>
+<rect class="st2" width="81" height="81"/>
 </svg>

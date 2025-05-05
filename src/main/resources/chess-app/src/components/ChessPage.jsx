@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ChessBoard from './ChessPage/ChessBoard.jsx';
 import './ChessPage/ChessPage.css';
-
+import CPbuttons from './ChessPage/CPbuttons';
 const ChessPage = () => {
     const boardSize = 8;
 
@@ -58,21 +58,48 @@ const ChessPage = () => {
         }
     };
 
+    const handleSurrender = () => {
+        console.log("Игрок сдался");
+    };
+
+    const handleDraw = () => {
+        console.log("Предложить ничью");
+    };
+
+    const handleNextMove = () => {
+        console.log("Следующий ход");
+    };
+
+    const handlePrevMove = () => {
+        console.log("Предыдущий ход");
+    };
+
     return (
         <div className="chess-page">
             <div className="info-about-game">
-
+                <a>Рейтинговая игра</a><br/>
+                <span style={{ color: '#FE6D00' }}> suhrobdomoiZ </span><a style={{ color: '#0f47ad' }}> VS </a><span style={{ color: '#FE6D00' }}> EBUHOHLOV282 </span>
             </div>
             <div className="moves">
+                <div className="movesTitle">
+                    <span>Ходы:</span>
+                </div>
 
+                <div className="movesTable">
+
+
+                </div>
             </div>
             <ChessBoard
                 onCellClick={handleCellClick}
                 board={board}
             />
-            <div className="CBbuttons-block">
-
-            </div>
+            <CPbuttons
+                onSurrender={handleSurrender}
+                onDraw={handleDraw}
+                onNextMove={handleNextMove}
+                onPrevMove={handlePrevMove}
+            />
         </div>
     );
 };
