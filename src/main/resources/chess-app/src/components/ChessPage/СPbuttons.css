@@ -1,6 +1,5 @@
 .CBbuttons {
     display: flex;
-    gap: 16px;
     justify-content: center;
     background: transparent;
 }
@@ -13,15 +12,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.CBbuttons img {
-    width: 40px; /* увеличил размер иконок */
-    height: 40px;
-    object-fit: contain;
-    transition: transform 0.2s ease;
-}
-
-.CBbuttons button:hover img {
-    transform: scale(1.15); /* усилил эффект при наведении */
 }

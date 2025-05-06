@@ -56,6 +56,7 @@ const ChessPage = () => {
             setBoard(newBoard);
             setSelectedCell(null);
         }
+
     };
 
     const handleSurrender = () => {
