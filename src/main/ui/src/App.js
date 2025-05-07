@@ -7,6 +7,7 @@ import ChessPage from "./components/ChessPage.jsx";
 
 const App = () => {
   return (
+
       <div className="App">
           <ChessPage />
       </div>
