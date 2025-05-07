@@ -1,7 +1,9 @@
 package io.github._au4uwkos.chess_game.model;
 
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import lombok.Data;
@@ -20,14 +22,14 @@ public class UserEntity {
     @Id
     private int id;
 
+    @Column("username")
+    @Size(min = 3, max = 50)
     private String username;
 
+    @Column("password")
     private String password;
 
-    @MappedCollection(idColumn = "user_id")
-    private List<UserRole> roles= new ArrayList<>();
-
-    public void setPassword(String password){
-        this.password = new BCryptPasswordEncoder().encode(password);
+    public void encodePassword(){
+        this.password = new BCryptPasswordEncoder().encode(this.password);
     }
 }

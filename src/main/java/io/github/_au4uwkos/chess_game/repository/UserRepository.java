@@ -11,6 +11,6 @@ public interface UserRepository extends ReactiveCrudRepository<UserEntity, Integ
     @Query("SELECT * FROM users WHERE username = :username")
     Mono<UserEntity> findByUsername(String username);
 
-    @Query("SELECT EXISTS (SELECT 1 FROM users WHERE usersname = :username)")
+    @Query("SELECT EXISTS (SELECT 1 FROM users WHERE username = :username)")
     Mono<Boolean> existsByUsername(String username);
 }

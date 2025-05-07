@@ -13,12 +13,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public Mono<Boolean> existsByUsername(String username){
+        return userRepository.existsByUsername(username);
+    }
+
     public Mono<UserEntity> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     public Mono<UserEntity> save(UserEntity user) {
-        user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 }
