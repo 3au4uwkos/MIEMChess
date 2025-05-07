@@ -1,0 +1,43 @@
+@font-face {
+    font-family: "AKONY";
+    src: url("../../../public/fonts/AKONY.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Russo One";
+    src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
+}
+.MPLeaders {
+
+}
+
+.highlighted {
+    color: #FE6D00;
+}
+
+.MPLeadersTable {
+    display: flex;
+    gap: 100px; /* расстояние между колонками */
+    background-color: #1b1b1b;
+    height: 180px;
+    width: 370px;
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    text-align: left;
+    font-family: "Russo One";
+}
+
+.MPLeaders h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-family: "AKONY";
+    color: #FFFFFF;
+    text-align: left;
+}
+.MPLeadersСolumns {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    gap: 40px; /* расстояние между колонками */
+}
+

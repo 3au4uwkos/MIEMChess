@@ -1,0 +1,151 @@
+@font-face {
+    font-family: "Akony";
+    src: url("../public/fonts/AKONY.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Russo One";
+    src: url("../public/fonts/RussoOne.ttf") format("truetype");
+}
+
+.RegPage {
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    padding: 6vh 6vw;
+    box-sizing: border-box;
+}
+
+.contentBlocksReg {
+    display: flex;
+    flex: 1;
+    gap: 4vw;
+}
+
+.leftBlockReg, .rightBlockReg {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+
+.UpperRegPage {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: 6vh 6vw;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.logos {
+    display: flex;
+    gap: 1vw;
+}
+
+.logos img {
+    height: 10vh;
+}
+
+/* Левая часть */
+.leftBlockReg {
+    font-family: "Akony", sans-serif;
+}
+
+.leftBlockReg h1 {
+    font-size: 5vw;
+    line-height: 1.1;
+    margin: 4vh 0;
+}
+
+.highlighted {
+    color: #fe6d00;
+}
+
+.descTextReg {
+    margin-top: 6vh;
+    font-size: 1vw;
+}
+
+
+.rightBlockReg h2 {
+    font-family: "Akony", sans-serif;
+    font-size: 2vw;
+    margin-top: 0vh;
+    margin-bottom: 5vh;
+    color: white;
+}
+
+.regForm {
+    font-family: "Russo One", sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.regForm label {
+    font-size: 1.5vw;
+    margin-bottom: 1vh;
+}
+
+.regForm input {
+    padding: 1.5vh 1vw;
+    font-size: 1.4vw;
+    margin-bottom: 3vh;
+    border: none;
+    border-radius: 0.8vw;
+    background: #262626;
+    color: white;
+}
+
+.regForm button {
+    font-family: "Russo One", sans-serif;
+    background: #fe6d00;
+    border: none;
+    padding: 2vh 0;
+    font-size: 2vw;
+    border-radius: 1vw;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.regForm button:hover {
+    background: #ff7f26;
+}
+
+.authBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2vh;
+    font-size: 1.5vw;
+}
+
+.authText {
+    font-family: "Russo One", sans-serif;
+    margin-bottom: 1vh;
+}
+
+.authLink {
+    font-family: "Russo One", sans-serif;
+    color: #fe6d00;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 1vh;
+    margin-top: -2vh;
+
+}

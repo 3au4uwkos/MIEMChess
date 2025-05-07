@@ -1,0 +1,31 @@
+.board {
+    margin-left: 5vh;
+    display: grid;
+    grid-template-columns: repeat(8, 10vh);
+    grid-template-rows: repeat(8, 10vh);
+
+}
+
+.cell {
+    width: 10vh;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cell.light {
+    background-color: #ffffff;
+}
+
+.cell.dark {
+    background-color: #0F47AD;
+}
+
+.figure {
+    width: 9.5vh;
+    height: 9.5vh;
+}
+
+

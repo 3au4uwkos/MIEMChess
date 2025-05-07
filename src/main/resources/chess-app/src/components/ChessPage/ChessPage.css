@@ -1,0 +1,88 @@
+.chess-page {
+
+    display: grid;
+    grid-template-areas:
+    "info info"
+    "board moves"
+    "board buttons";
+    grid-template-columns: auto auto;
+    grid-template-rows: auto 1fr;
+    gap: 1vh 1vw;
+    background: #000;
+    min-height: 100vh;
+    min-width: 100vw;
+    box-sizing: border-box;
+}
+
+.info-about-game {
+    margin-left: 5vh;
+    margin-top:3vh;
+    grid-area: info;
+    font-family: "AKONY", sans-serif;
+    font-size: 1.6vw;
+    color: #fff;
+}
+.info-about-game span {
+    font-family: "Russo One", sans-serif;
+}
+.moves {
+    grid-area: moves;
+}
+.movesTable{
+    border-radius: 2vh;
+    background: #1B1B1B;
+    height: 70vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: "Russo One", sans-serif;
+    font-size: 1.5vw;
+    margin-top: 1vh;
+}
+.movesTitle span{
+    font-family: "AKONY";
+    color: #ffffff;
+    font-size: 1.5vw;
+    margin-bottom: 1vh;
+}
+
+.ChessBoard {
+
+    grid-area: board;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CBbuttons {
+    margin-left: -27vh;
+    grid-area: buttons;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* подтянуть к верхней границе ячейки */
+    margin-top: -10vh;
+    gap: 2.5vw;
+}
+
+.CBbuttons button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CBbuttons img {
+    width: 6vw;
+    height: 6vh;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.CBbuttons button:hover img {
+    margin-top: -3vh;
+    transform: scale(1.1);
+}

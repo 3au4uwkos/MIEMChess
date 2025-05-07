@@ -1,0 +1,80 @@
+@font-face {
+    font-family: "Russo One";
+    src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "AKONY";
+    src: url("../../../public/fonts/AKONY.ttf") format("truetype");
+}
+
+.MainPage {
+    overflow-x: hidden;
+    background-color: #000000;
+    min-height: 100vh;
+    width: 100%;
+    color: white;
+    display: grid;
+    grid-template-areas:
+        "navbar navbar"
+        "header leaders"
+        "userstats lastgame";
+    grid-template-columns: 2fr 1fr;
+    gap: 1vw;
+
+}
+
+
+.highlighted {
+    color: #fe6d00;
+}
+
+.MainPageHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 3.125rem;
+    font-family: "AKONY";
+    grid-area: header;
+}
+
+.MainPageTitle {
+    font-size: 2.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.MainPageButton {
+    background-color: #0f47ad;
+    color: #fff;
+    border: none;
+    padding: 1.25rem 6.25rem;
+    border-radius: 1.25rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "AKONY";
+}
+
+.MainPageButton:hover {
+    background-color: #fe6d00;
+}
+
+.MPLeaders {
+    grid-area: leaders;
+
+}
+
+.MPUserStats {
+    grid-area: userstats;
+    margin-left: 3.125rem;
+    margin-top: -3.125rem;
+}
+
+.MPLastGame {
+    grid-area: lastgame;
+    margin-right: 3.125rem;
+}
+
+.MPNavbar {
+    grid-area: navbar;
+}

@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "AKONY";
+    src: url("../../../public/fonts/AKONY.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Russo One";
+    src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
+}
+
+.MPLastGame {
+    display: flex;
+    flex-direction: column; /* элементы по вертикали */
+    align-items: left;     /* центрируем по горизонтали */
+
+}
+
+.MPLastGameTitle {
+
+}
+
+.MPLastGameTitle h2 {
+    text-align: left;
+    font-family: 'AKONY';
+    font-size: 24px;
+}
+
+.MPLastGameBody {
+    background-color: #1b1b1b;
+    padding: 20px;
+    border-radius: 12px;
+    height: 180px;
+    width: 370px;
+}
