@@ -3,9 +3,22 @@ import ChessBoard from './ChessPage/ChessBoard.jsx';
 import './ChessPage/ChessPage.css';
 import CPbuttons from './ChessPage/CPbuttons';
 const ChessPage = () => {
-    const boardSize = 8;
 
-    const initialBoard = [
+    const boardSize = 8;
+    const [possibleMoves, setPossibleMoves] = useState([]);//возможные ходы
+    const [selectedCell, setSelectedCell] = useState(null);  // запоминает выбранную клетку
+
+    const generateFakeMoves = (row, col) => {//генерируем ходы
+        const moves = [];
+        for (let i = 0; i < 3; i++) {
+            moves.push({
+                row: Math.floor(Math.random() * 8),
+                col: Math.floor(Math.random() * 8)
+            });
+        }
+        return moves;
+    };
+    const initialBoard = [//фигурки
         [
             '/figures/black_rook.svg',
             '/figures/black_knight.svg',
@@ -35,29 +48,35 @@ const ChessPage = () => {
     ];
 
     const [board, setBoard] = useState(initialBoard);
-    const [selectedCell, setSelectedCell] = useState(null); // 🆕
+
 
     const handleCellClick = (row, col) => {
         const clickedFigure = board[row][col];
 
-        // Если еще ничего не выбрано и клик по фигуре — выбираем
         if (!selectedCell && clickedFigure) {
             setSelectedCell({ row, col });
-        }
-        // Если уже выбрана клетка — перемещаем туда фигуру
-        else if (selectedCell) {
+            const moves = generateFakeMoves(row, col);
+            setPossibleMoves(moves);
+            console.log(moves);
+        } else if (selectedCell) {
+            if (selectedCell.row === row && selectedCell.col === col) {
+                setSelectedCell(null);
+                setPossibleMoves([]);
+                return;
+            }
+
             const newBoard = board.map((boardRow) => [...boardRow]);
 
-            // Перемещение
             newBoard[row][col] = board[selectedCell.row][selectedCell.col];
             newBoard[selectedCell.row][selectedCell.col] = null;
 
-            // Обновляем доску и сбрасываем выделение
             setBoard(newBoard);
             setSelectedCell(null);
+            setPossibleMoves([]);
         }
-
     };
+
+
 
     const handleSurrender = () => {
         console.log("Игрок сдался");
@@ -74,7 +93,7 @@ const ChessPage = () => {
     const handlePrevMove = () => {
         console.log("Предыдущий ход");
     };
-
+    //так тут у нас в info-about-game лежит тип игры и ники игроков
     return (
         <div className="chess-page">
             <div className="info-about-game">
@@ -94,12 +113,15 @@ const ChessPage = () => {
             <ChessBoard
                 onCellClick={handleCellClick}
                 board={board}
+                selectedCell={selectedCell}
+                possibleMoves={possibleMoves}
             />
             <CPbuttons
                 onSurrender={handleSurrender}
                 onDraw={handleDraw}
                 onNextMove={handleNextMove}
                 onPrevMove={handlePrevMove}
+
             />
         </div>
     );

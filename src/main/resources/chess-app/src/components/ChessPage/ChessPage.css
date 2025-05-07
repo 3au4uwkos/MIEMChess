@@ -60,7 +60,7 @@
     grid-area: buttons;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* подтянуть к верхней границе ячейки */
+    align-items: flex-start;
     margin-top: -10vh;
     gap: 2.5vw;
 }
@@ -86,3 +86,4 @@
     margin-top: -3vh;
     transform: scale(1.1);
 }
+
