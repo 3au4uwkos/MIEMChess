@@ -20,19 +20,15 @@ public class SecurityConfig {
         this.manager = manager;
     }
 
+    // TODO Fix authorization with JWT
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/api/login", "/api/signup").permitAll()
-                        .anyExchange().authenticated()
+                        .anyExchange().permitAll()
                 )
-                .exceptionHandling(handling -> handling
-                        .authenticationEntryPoint((exchange, ex) -> {
-                            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                            return exchange.getResponse().setComplete();
-                        }))
                 .authenticationManager(manager);
         return http.build();
     }

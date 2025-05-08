@@ -9,7 +9,7 @@ const App = () => {
   return (
 
       <div className="App">
-          <ChessPage />
+          <MainPage />
       </div>
       /*<div className="MainPage">
       <Router>

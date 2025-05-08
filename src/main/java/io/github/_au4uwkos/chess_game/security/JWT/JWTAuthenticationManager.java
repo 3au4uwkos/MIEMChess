@@ -1,4 +1,4 @@
-package io.github._au4uwkos.chess_game.security;
+package io.github._au4uwkos.chess_game.security.JWT;
 
 import io.github._au4uwkos.chess_game.service.UserService;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -13,22 +13,23 @@ import reactor.core.publisher.Mono;
 @Component
 public class JWTAuthenticationManager implements ReactiveAuthenticationManager {
 
-    private final JWTUtil jwtUtil;
+    private final JWTValidator validator;
     private final UserService userService;
 
-    public JWTAuthenticationManager(JWTUtil jwtUtil, UserService userService) {
-        this.jwtUtil = jwtUtil;
+    public JWTAuthenticationManager(JWTValidator validator, UserService userService) {
+        this.validator = validator;
         this.userService = userService;
     }
 
     @Override
     public Mono<Authentication> authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println(1);
         String token = authentication.getCredentials().toString();
-        String username = jwtUtil.extractUsername(token);
+        String username = validator.extractUsername(token);
 
         return userService.findByUsername(username)
                 .handle((userDetails, sink) -> {
-                    if (jwtUtil.validateToken(token, userDetails.getUsername())) {
+                    if (validator.validateToken(token, userDetails.getUsername())) {
                         sink.next(authentication);
                     } else {
                         sink.error(new AuthenticationException("Invalid JWT token") {
