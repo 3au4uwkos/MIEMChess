@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import '../AuthPage.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useHttp } from '../hooks/useEndpoints';
 
 const AuthPage = () => {
 
+    const apiBaseUrl = useHttp();
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -36,7 +38,7 @@ const AuthPage = () => {
 
         try {
             // Запрос к бэкенду через axios
-            const response = await axios.post("http://localhost:5000/login", user_info);
+            const response = await axios.post(`${apiBaseUrl}/api/login`, user_info);
 
             // Если авторизация успешна, например, можно перенаправить на главную страницу
             if (response.data.success) {

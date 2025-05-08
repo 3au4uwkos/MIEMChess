@@ -6,21 +6,14 @@ import MainPage from "./components/MainPage.jsx";
 import ChessPage from "./components/ChessPage.jsx";
 
 const App = () => {
-  return (
-
-      <div className="App">
-          <MainPage />
-      </div>
-      /*<div className="MainPage">
-      <Router>
-          <Routes>
-              <Route path="/" element={<AuthPage />} />
-              <Route path="/Registration" element={<RegPage />} />
-          </Routes>
-      </Router>
-      </div>
-*/
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<AuthPage />} />
+                <Route path="/Registration" element={<RegPage />} />
+            </Routes>
+        </Router>
+);
 }
 
 export default App;

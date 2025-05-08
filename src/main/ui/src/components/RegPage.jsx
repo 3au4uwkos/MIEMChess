@@ -3,8 +3,10 @@ import '../RegPage.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useHttp } from '../hooks/useEndpoints';
 
 const RegPage = () => {
+    const apiBaseUrl = useHttp();
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -40,7 +42,7 @@ const RegPage = () => {
 
         try {
             // Запрос на сервер для регистрации
-            const response = await axios.post("http://localhost:5000/register", user_info);
+            const response = await axios.post(`${apiBaseUrl}/api/login`, user_info);
 
             // Если регистрация успешна, можно перенаправить на страницу авторизации
             if (response.data.success) {
