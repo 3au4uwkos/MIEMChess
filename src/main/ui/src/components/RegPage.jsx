@@ -29,8 +29,16 @@ const RegPage = () => {
             setErrors((prevErrors) => ({ ...prevErrors, username: "Имя пользователя не может быть пустым." }));
             hasError = true;
         }
+        if (username.length < 3 || username.length > 30) {
+            setErrors((prevErrors) => ({ ...prevErrors, username: "Имя пользователя должно содержать от 3 до 30 символов" }));
+            hasError = true;
+        }
         if (!password) {
             setErrors((prevErrors) => ({ ...prevErrors, password: "Пароль не может быть пустым." }));
+            hasError = true;
+        }
+        if (password.length < 8) {
+            setErrors((prevErrors) => ({ ...prevErrors, password: "Пароль должен содержать хотя бы 8 символов" }));
             hasError = true;
         }
         if (password !== confirmPassword) {
@@ -38,21 +46,35 @@ const RegPage = () => {
             hasError = true;
         }
 
-        if (hasError) return; // Если есть ошибки, не отправляем запрос
+        if (hasError) return;
 
         try {
-            // Запрос на сервер для регистрации
-            const response = await axios.post(`${apiBaseUrl}/api/login`, user_info);
+            const response = await axios.post(`${apiBaseUrl}/api/login`, {
+                username,
+                password
+            });
 
-            // Если регистрация успешна, можно перенаправить на страницу авторизации
-            if (response.data.success) {
-                navigate("/MainPage"); // Перенаправляем на главную страницу
+            // Проверяем успешный статус (200-299)
+            if (response.status >= 200 && response.status < 300) {
+                localStorage.setItem('authToken', response.data.accessToken);
+                navigate("/MainPage");
             } else {
-                alert("Ошибка при регистрации! Попробуйте снова.");
+                setErrors({ password: "Неверный логин или пароль" });
             }
         } catch (error) {
-            console.error("Ошибка при регистрации:", error);
-            alert("Произошла ошибка, попробуйте снова.");
+            console.error("Ошибка авторизации:", error);
+
+            if (error.response) {
+                if (error.response.status === 401) {
+                    setErrors({ password: "Неверный логин или пароль" });
+                } else {
+                    setErrors({ password: "Произошла неизвестная ошибка" });
+                }
+            } else if (error.request) {
+                setErrors({ password: "Ошибка сети! Попробуйте снова!" });
+            } else {
+                setErrors({ password: "Ошибка при отправке запроса" });
+            }
         }
     }
     return (

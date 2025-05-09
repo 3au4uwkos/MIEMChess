@@ -15,40 +15,43 @@ const AuthPage = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        setErrors({ username: "", password: "" }); // Очистка ошибок при отправке
+        setErrors({ username: "", password: "" });
 
-        const user_info = {
-            username: username,
-            password: password
-        };
+        const validationErrors = {};
+        if (!username) validationErrors.username = "Имя пользователя не может быть пустым";
+        if (!password) validationErrors.password = "Пароль не может быть пустым";
 
-        let hasError = false;
-
-        if (!username) {
-            setErrors((prevErrors) => ({ ...prevErrors, username: "Имя пользователя не может быть пустым." }));
-            hasError = true;
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
         }
-
-        if (!password) {
-            setErrors((prevErrors) => ({ ...prevErrors, password: "Пароль не может быть пустым." }));
-            hasError = true;
-        }
-
-        if (hasError) return; // Если есть ошибки, не отправляем запрос
 
         try {
-            // Запрос к бэкенду через axios
-            const response = await axios.post(`${apiBaseUrl}/api/login`, user_info);
+            const response = await axios.post(`${apiBaseUrl}/api/login`, {
+                username,
+                password
+            });
 
-            // Если авторизация успешна, например, можно перенаправить на главную страницу
-            if (response.data.success) {
+            if (response.status >= 200 && response.status < 300) {
+                localStorage.setItem('authToken', response.data.accessToken);
                 navigate("/MainPage");
             } else {
-                setErrors((prevErrors) => ({ ...prevErrors, password: "Неверный логин или пароль." }));
+                setErrors({ password: "Неверный логин или пароль" });
             }
         } catch (error) {
-            console.error("Ошибка при авторизации:", error);
-            alert("Произошла ошибка, попробуйте снова.");
+            console.error("Ошибка авторизации:", error);
+
+            if (error.response) {
+                if (error.response.status === 401) {
+                    setErrors({ password: "Неверный логин или пароль" });
+                } else {
+                    setErrors({ password: "Произошла неизвестная ошибка" });
+                }
+            } else if (error.request) {
+                setErrors({ password: "Ошибка сети! Попробуйте снова!" });
+            } else {
+                setErrors({ password: "Ошибка при отправке запроса" });
+            }
         }
     };
 
