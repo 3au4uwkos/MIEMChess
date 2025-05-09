@@ -54,23 +54,26 @@ const ChessPage = () => {
         const clickedFigure = board[row][col];
 
         if (!selectedCell && clickedFigure) {
+            // Если фигура выбрана, то выбираем эту клетку и генерируем возможные ходы
             setSelectedCell({ row, col });
             const moves = generateFakeMoves(row, col);
             setPossibleMoves(moves);
             console.log(moves);
         } else if (selectedCell) {
-            if (selectedCell.row === row && selectedCell.col === col) {
-                setSelectedCell(null);
-                setPossibleMoves([]);
-                return;
+            // Проверка, является ли кликнутый ход допустимым
+            const validMove = possibleMoves.some(move => move.row === row && move.col === col);
+
+            if (validMove) {
+                // Если ход допустимый, перемещаем фигуру
+                const newBoard = board.map((boardRow) => [...boardRow]);
+
+                newBoard[row][col] = board[selectedCell.row][selectedCell.col];
+                newBoard[selectedCell.row][selectedCell.col] = null;
+
+                setBoard(newBoard);
             }
 
-            const newBoard = board.map((boardRow) => [...boardRow]);
-
-            newBoard[row][col] = board[selectedCell.row][selectedCell.col];
-            newBoard[selectedCell.row][selectedCell.col] = null;
-
-            setBoard(newBoard);
+            // После хода или отмены выделения очищаем выбранную клетку и возможные ходы
             setSelectedCell(null);
             setPossibleMoves([]);
         }

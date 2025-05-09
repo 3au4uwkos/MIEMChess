@@ -1,10 +1,9 @@
 .chess-page {
-
     display: grid;
     grid-template-areas:
-    "info info"
-    "board moves"
-    "board buttons";
+        "info info"
+        "board moves"
+        "board buttons";
     grid-template-columns: auto auto;
     grid-template-rows: auto 1fr;
     gap: 1vh 1vw;
@@ -16,19 +15,22 @@
 
 .info-about-game {
     margin-left: 5vh;
-    margin-top:3vh;
+    margin-top: 3vh;
     grid-area: info;
     font-family: "AKONY", sans-serif;
     font-size: 1.6vw;
     color: #fff;
 }
+
 .info-about-game span {
     font-family: "Russo One", sans-serif;
 }
+
 .moves {
     grid-area: moves;
 }
-.movesTable{
+
+.movesTable {
     border-radius: 2vh;
     background: #1B1B1B;
     height: 70vh;
@@ -40,7 +42,8 @@
     font-size: 1.5vw;
     margin-top: 1vh;
 }
-.movesTitle span{
+
+.movesTitle span {
     font-family: "AKONY";
     color: #ffffff;
     font-size: 1.5vw;
@@ -48,7 +51,6 @@
 }
 
 .ChessBoard {
-
     grid-area: board;
     display: flex;
     justify-content: center;
@@ -73,6 +75,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    transition: transform 0.2s ease;
 }
 
 .CBbuttons img {
@@ -82,8 +86,10 @@
     transition: transform 0.2s ease;
 }
 
-.CBbuttons button:hover img {
-    margin-top: -3vh;
-    transform: scale(1.1);
+.CBbuttons button:hover {
+    transform: scale(1.5);
 }
 
+.CBbuttons button:hover img {
+    transform: none;
+}

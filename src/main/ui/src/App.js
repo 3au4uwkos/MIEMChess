@@ -7,13 +7,28 @@ import ChessPage from "./components/ChessPage.jsx";
 
 const App = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<AuthPage />} />
-                <Route path="/Registration" element={<RegPage />} />
-            </Routes>
-        </Router>
-);
+        <ChessPage />
+
+
+    );
 }
 
 export default App;
+
+
+/*
+
+      <Router>
+          <Routes>
+              <Route path="/" element={<AuthPage />} />
+              <Route path="/Registration" element={<RegPage />} />
+          </Routes>
+      </Router>
+      */
+
+/*
+
+      <div className="App">
+          <ChessPage />
+      </div>
+      */
