@@ -1,66 +1,65 @@
-@font-face {
-    font-family: "Russo One";
-    src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
-}
-
 .MPMenu {
     position: absolute;
-    top: 20px;
-    right: 20px;
-
+    background-color: transparent;
+    left: 90vw;
 }
 
 .MPMenuButton {
-    background: none;
+    background: transparent;
     border: none;
+
     cursor: pointer;
-    margin-top: -15px;
-    height: 20px;
-    width: 20px;
-    margin-right: 100px;
+}
+
+.MPMenuButton img {
+    border: none;
+
+    width: 6vw;
+    height: 6vw;
 }
 
 .MPMenuDropdown {
     display: none;
-    height: 64px;
-    width:130px;
-    margin-right: 0px;
     position: absolute;
-    top: -5px;
-    right: 0;
+    top: calc(100% + 1vh);
     background-color: #1b1b1b;
-    padding: 5px;
-    border-radius: 8px;
+    padding: 2vh;
+    border-radius: 1vh;
     flex-direction: column;
-    gap: 50px;
+    width: 12vw;
+    min-height: 15vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin-top: -7vh;
+    margin-left: -3vw;
+
 }
 
 .MPMenu:hover .MPMenuDropdown {
     display: flex;
 }
 
-.MPMenuDropdownContent a  {
+.MPMenuDropdownContent a {
     display: flex;
     align-items: center;
-    gap: 8px; /* отступ между картинкой и текстом */
+    gap: 1vw;
     text-decoration: none;
     color: white;
-    font-size: 18px;
+    font-size: 3vh;
     font-family: "Russo One", sans-serif;
+    margin-bottom: 1.5vh;
 }
-.MPMenuDropdownContent a img {
-    width: 15px;
-    height: 15px;
 
+.MPMenuDropdownContent a img {
+    width: 2vh;
+    height: 2vh;
     vertical-align: middle;
 }
+
 .MPMenuDropdownButton {
-    background: none;
     border: none;
     cursor: pointer;
     text-align: left;
-    height: 20px;
-    width: 20px;
+    width: 3vh;
+    height: 3vh;
 }
-
-

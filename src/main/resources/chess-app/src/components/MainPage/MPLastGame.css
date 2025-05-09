@@ -9,25 +9,21 @@
 
 .MPLastGame {
     display: flex;
-    flex-direction: column; /* элементы по вертикали */
-    align-items: left;     /* центрируем по горизонтали */
-
-}
-
-.MPLastGameTitle {
-
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .MPLastGameTitle h2 {
     text-align: left;
     font-family: 'AKONY';
-    font-size: 24px;
+    font-size: 3vh;
 }
 
 .MPLastGameBody {
     background-color: #1b1b1b;
-    padding: 20px;
-    border-radius: 12px;
-    height: 180px;
-    width: 370px;
+    padding: 3vh 3vw;
+    border-radius: 1.5vh;
+    height: 24vh;
+    width: 28vw;
+    box-sizing: border-box;
 }

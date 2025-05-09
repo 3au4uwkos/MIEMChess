@@ -6,38 +6,42 @@
     font-family: "Russo One";
     src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
 }
-.MPLeaders {
-
-}
 
 .highlighted {
-    color: #FE6D00;
+    color: #fe6d00;
+}
+
+.MPLeaders {
+    grid-area: leaders;
+    max-width: 100%;
 }
 
 .MPLeadersTable {
     display: flex;
-    gap: 100px; /* расстояние между колонками */
+    gap: 6vw;
     background-color: #1b1b1b;
-    height: 180px;
-    width: 370px;
-    padding: 20px;
-    border-radius: 12px;
-    color: white;
+    height: 27vh;
+    width: 24vw;
+    padding: 2vh;
+    border-radius: 1.5vh;
+    color: #fff;
     text-align: left;
     font-family: "Russo One";
+    font-size: 2vh;
 }
 
 .MPLeaders h2 {
-    font-size: 24px;
-    margin-bottom: 12px;
+    font-size: 3vh;
+    margin-bottom: 1vh;
     font-family: "AKONY";
-    color: #FFFFFF;
+    color: #fff;
     text-align: left;
 }
-.MPLeadersСolumns {
+
+.MPLeadersColumn {
     display: flex;
     flex-direction: column;
-    display: flex;
-    gap: 40px; /* расстояние между колонками */
+    gap: 4vh;
 }
+
 

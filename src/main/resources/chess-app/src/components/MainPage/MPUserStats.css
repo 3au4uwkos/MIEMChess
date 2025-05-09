@@ -2,6 +2,7 @@
     font-family: "AKONY";
     src: url("../../../public/fonts/AKONY.ttf") format("truetype");
 }
+
 @font-face {
     font-family: "Russo One";
     src: url("../../../public/fonts/RussoOne.ttf") format("truetype");
@@ -9,25 +10,24 @@
 
 .MPUserStats {
     display: flex;
-    flex-direction: column; /* элементы по вертикали */
-    align-items: left;     /* центрируем по горизонтали */
-
-}
-
-.MPUserStatsTitle {
-
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5vw;
 }
 
 .MPUserStatsTitle h2 {
     text-align: left;
     font-family: 'AKONY';
-    font-size: 24px;
+    font-size: 3vh;
+    margin-left: 2vw;
 }
 
 .MPUserStatsBody {
     background-color: #1b1b1b;
-    padding: 20px;
-    border-radius: 12px;
-    height: 180px;
-    width: 400px;
+    padding: 3vh 3vw;
+    border-radius: 1.5vh;
+    height: 30vh;
+    width: 30vw;
+    box-sizing: border-box;
+    margin-left: 2vw;
 }

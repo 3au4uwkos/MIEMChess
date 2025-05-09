@@ -21,9 +21,7 @@
         "userstats lastgame";
     grid-template-columns: 2fr 1fr;
     gap: 1vw;
-
 }
-
 
 .highlighted {
     color: #fe6d00;
@@ -33,23 +31,23 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0 3.125rem;
+    padding: 0 5vw;
     font-family: "AKONY";
     grid-area: header;
 }
 
 .MainPageTitle {
-    font-size: 2.75rem;
-    margin-bottom: 1.25rem;
+    font-size: 6vh;
+    margin-bottom: 2vh;
 }
 
 .MainPageButton {
     background-color: #0f47ad;
     color: #fff;
     border: none;
-    padding: 1.25rem 6.25rem;
-    border-radius: 1.25rem;
-    font-size: 1.5rem;
+    padding: 2.5vh 5vw;
+    border-radius: 2vh;
+    font-size: 3vh;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-family: "AKONY";
@@ -61,18 +59,17 @@
 
 .MPLeaders {
     grid-area: leaders;
-
+    max-width: 100%;
 }
 
 .MPUserStats {
     grid-area: userstats;
-    margin-left: 3.125rem;
-    margin-top: -3.125rem;
+    margin-left: 3vw;
+    margin-top: -3vh;
 }
 
 .MPLastGame {
     grid-area: lastgame;
-    margin-right: 3.125rem;
 }
 
 .MPNavbar {
