@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import ChessBoard from './ChessPage/ChessBoard.jsx';
 import './ChessPage/ChessPage.css';
 import CPbuttons from './ChessPage/CPbuttons';
+import { useWebSocket } from '../hooks/useWebSocket';
+import { useWs } from '../hooks/useEndpoints';
+
 const ChessPage = () => {
 
     const boardSize = 8;
     const [possibleMoves, setPossibleMoves] = useState([]);//возможные ходы
     const [selectedCell, setSelectedCell] = useState(null);  // запоминает выбранную клетку
+
+    const { wsBaseUrl } = useWs();
+    const { isConnected, messages, sendMessage } = useWebSocket(`${wsBaseUrl}`);
+    const [messageInput, setMessageInput] = useState('');
 
     const generateFakeMoves = (row, col) => {//генерируем ходы
         const moves = [];
@@ -70,6 +77,11 @@ const ChessPage = () => {
                 newBoard[row][col] = board[selectedCell.row][selectedCell.col];
                 newBoard[selectedCell.row][selectedCell.col] = null;
 
+                sendMessage(JSON.stringify({
+                    "from": row * 10 + col,
+                    "to": selectedCell.row * 10 + selectedCell.col
+                }))
+
                 setBoard(newBoard);
             }
 
@@ -95,6 +107,11 @@ const ChessPage = () => {
 
     const handlePrevMove = () => {
         console.log("Предыдущий ход");
+    };
+
+    const handleSend = () => {
+        sendMessage(messageInput);
+        setMessageInput('');
     };
     //так тут у нас в info-about-game лежит тип игры и ники игроков
     return (

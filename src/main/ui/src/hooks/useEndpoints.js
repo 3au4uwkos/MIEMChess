@@ -2,11 +2,11 @@
 import { useConfig } from './useConfig';
 
 export const useHttp = () => {
-    const { apiBaseUrl } = useConfig();
+    const { apiBaseUrl, wsBaseUrl } = useConfig();
     return apiBaseUrl;
 };
 
 export const useWs = () => {
-    const { wsBaseUrl } = useConfig();
+    const { apiBaseUrl, wsBaseUrl } = useConfig();
     return wsBaseUrl;
 };

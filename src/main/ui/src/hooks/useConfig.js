@@ -28,7 +28,7 @@ export const useConfig = () => {
         return () => {
             document.body.removeChild(script);
         };
-    }, []); // Пустой массив зависимостей - эффект выполняется только при монтировании
+    });
 
     return config;
 };
