@@ -12,8 +12,9 @@ const ChessPage = () => {
     const [selectedCell, setSelectedCell] = useState(null);  // запоминает выбранную клетку
 
     const { wsBaseUrl } = useWs();
-    const { isConnected, messages, sendMessage } = useWebSocket(`${wsBaseUrl}`);
-    const [messageInput, setMessageInput] = useState('');
+    const { isConnected, messages, sendMessage } = useWebSocket("ws://localhost:8080/ws/game"); // Use wsBaseUrl if needed
+    const [messageInput, setMessageInput] = useState(''); // Remove if not used
+
 
     const generateFakeMoves = (row, col) => {//генерируем ходы
         const moves = [];
@@ -77,10 +78,12 @@ const ChessPage = () => {
                 newBoard[row][col] = board[selectedCell.row][selectedCell.col];
                 newBoard[selectedCell.row][selectedCell.col] = null;
 
-                sendMessage(JSON.stringify({
-                    "from": row * 10 + col,
-                    "to": selectedCell.row * 10 + selectedCell.col
-                }))
+                sendMessage({ // Send move data as JSON
+                    type: "move", // Add a type to identify the message
+                    from: { row: selectedCell.row, col: selectedCell.col },
+                    to: { row: row, col: col },
+                    // You might include other relevant data, like player ID, game ID, etc.
+                });
 
                 setBoard(newBoard);
             }

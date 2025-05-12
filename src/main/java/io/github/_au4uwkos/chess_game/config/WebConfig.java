@@ -22,7 +22,7 @@ public class WebConfig implements WebFluxConfigurer {
     public RouterFunction<ServerResponse> staticResourceRouter() {
         return resources("/**", new ClassPathResource("static/"))
                 .and(route(GET("/"),
-                        req -> ok()
+                        _ -> ok()
                                 .contentType(MediaType.TEXT_HTML)
                                 .bodyValue(new ClassPathResource("static/index.html")))
                         .and(route(GET("/{path:[^\\.]*}"),
