@@ -4,10 +4,10 @@ import RegPage from './components/RegPage.jsx';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "./components/MainPage.jsx";
 import ChessPage from "./components/ChessPage.jsx";
-
+import LoadingScreen from "./components/MainPage/LoadingScreen";
 const App = () => {
   return (
-      <ChessPage />
+      <MainPage />
 
 
   );
