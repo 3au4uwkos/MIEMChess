@@ -7,7 +7,7 @@ import ChessPage from "./components/ChessPage.jsx";
 import LoadingScreen from "./components/MainPage/LoadingScreen";
 const App = () => {
   return (
-      <MainPage />
+      <ChessPage />
 
 
   );

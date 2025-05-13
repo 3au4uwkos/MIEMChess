@@ -18,6 +18,8 @@ const ChessPage = () => {
         }
         return moves;
     };
+    const Moves =[];
+
     const initialBoard = [//фигурки
         [
             '/figures/black_rook.svg',
@@ -89,13 +91,6 @@ const ChessPage = () => {
         console.log("Предложить ничью");
     };
 
-    const handleNextMove = () => {
-        console.log("Следующий ход");
-    };
-
-    const handlePrevMove = () => {
-        console.log("Предыдущий ход");
-    };
     //так тут у нас в info-about-game лежит тип игры и ники игроков
     return (
         <div className="chess-page">
@@ -122,8 +117,6 @@ const ChessPage = () => {
             <CPbuttons
                 onSurrender={handleSurrender}
                 onDraw={handleDraw}
-                onNextMove={handleNextMove}
-                onPrevMove={handlePrevMove}
 
             />
         </div>
