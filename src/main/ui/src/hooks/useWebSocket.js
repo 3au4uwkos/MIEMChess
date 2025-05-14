@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 export const useWebSocket = (url) => {
     const [isConnected, setIsConnected] = useState(false);
@@ -20,7 +20,7 @@ export const useWebSocket = (url) => {
                     setMessages(prev => [...prev, data]);
                 } catch (e) {
                     console.error("Failed to parse message:", event.data, e);
-                    setMessages(prev => [...prev, { type: "error", message: "Invalid message format" }]);
+                    // setMessages(prev => [...prev, { type: "error", message: "Invalid message format" }]);
                 }
             };
 
@@ -53,5 +53,5 @@ export const useWebSocket = (url) => {
         }
     };
 
-    return { isConnected, messages, sendMessage };
+    return {isConnected, messages, sendMessage};
 };

@@ -8,8 +8,6 @@ import ChessPage from "./components/ChessPage.jsx";
 const App = () => {
     return (
         <ChessPage />
-
-
     );
 }
 
@@ -27,8 +25,4 @@ export default App;
       */
 
 /*
-
-      <div className="App">
-          <ChessPage />
-      </div>
       */

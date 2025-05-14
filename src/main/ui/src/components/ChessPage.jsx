@@ -6,17 +6,18 @@ import { useWebSocket } from '../hooks/useWebSocket';
 import { useWs } from '../hooks/useEndpoints';
 
 const ChessPage = () => {
-
     const boardSize = 8;
-    const [possibleMoves, setPossibleMoves] = useState([]);//возможные ходы
-    const [selectedCell, setSelectedCell] = useState(null);  // запоминает выбранную клетку
+    const [possibleMoves, setPossibleMoves] = useState([]);
+    const [selectedCell, setSelectedCell] = useState(null);
+    const [moveHistory, setMoveHistory] = useState([]); // история ходов
 
     const { wsBaseUrl } = useWs();
-    const { isConnected, messages, sendMessage } = useWebSocket("ws://localhost:8080/ws/game"); // Use wsBaseUrl if needed
-    const [messageInput, setMessageInput] = useState(''); // Remove if not used
+    const { isConnected, messages, sendMessage } = useWebSocket("ws://localhost:8080/ws/game");
+    const [messageInput, setMessageInput] = useState('');
 
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
-    const generateFakeMoves = (row, col) => {//генерируем ходы
+    const generateFakeMoves = (row, col) => {
         const moves = [];
         for (let i = 0; i < 3; i++) {
             moves.push({
@@ -26,7 +27,8 @@ const ChessPage = () => {
         }
         return moves;
     };
-    const initialBoard = [//фигурки
+
+    const initialBoard = [
         [
             '/figures/black_rook.svg',
             '/figures/black_knight.svg',
@@ -57,44 +59,62 @@ const ChessPage = () => {
 
     const [board, setBoard] = useState(initialBoard);
 
-
     const handleCellClick = (row, col) => {
         const clickedFigure = board[row][col];
 
         if (!selectedCell && clickedFigure) {
-            // Если фигура выбрана, то выбираем эту клетку и генерируем возможные ходы
             setSelectedCell({ row, col });
             const moves = generateFakeMoves(row, col);
             setPossibleMoves(moves);
             console.log(moves);
         } else if (selectedCell) {
-            // Проверка, является ли кликнутый ход допустимым
             const validMove = possibleMoves.some(move => move.row === row && move.col === col);
 
             if (validMove) {
-                // Если ход допустимый, перемещаем фигуру
-                const newBoard = board.map((boardRow) => [...boardRow]);
+                const newBoard = board.map(boardRow => [...boardRow]);
 
-                newBoard[row][col] = board[selectedCell.row][selectedCell.col];
+                const fromFigure = board[selectedCell.row][selectedCell.col];
+                newBoard[row][col] = fromFigure;
                 newBoard[selectedCell.row][selectedCell.col] = null;
 
-                sendMessage({ // Send move data as JSON
-                    type: "move", // Add a type to identify the message
+                sendMessage({
+                    type: "move",
                     from: { row: selectedCell.row, col: selectedCell.col },
-                    to: { row: row, col: col },
-                    // You might include other relevant data, like player ID, game ID, etc.
+                    to: { row, col },
                 });
+
+
+                const moveNotation = `${getFigureSymbol(fromFigure)} ${letters[selectedCell.col]}${8 - selectedCell.row} → ${letters[col]}${8 - row}`;
+                setMoveHistory(prevHistory => [...prevHistory, moveNotation]);
 
                 setBoard(newBoard);
             }
 
-            // После хода или отмены выделения очищаем выбранную клетку и возможные ходы
             setSelectedCell(null);
             setPossibleMoves([]);
         }
     };
 
+    const getFigureSymbol = (figurePath) => {
+        if (!figurePath) return '';
 
+        const name = figurePath.split('/').pop().split('.')[0];
+        const map = {
+            'white_pawn': '♟',
+            'white_rook': '♜',
+            'white_knight': '♞' ,
+            'white_bishop': '♝',
+            'white_queen': '♛',
+            'white_king': '♚',
+            'black_pawn': '♙',
+            'black_rook': '♖',
+            'black_knight': '♘',
+            'black_bishop': '♗',
+            'black_queen': '♕',
+            'black_king': '♔'
+        };
+        return map[name] || '?';
+    };
 
     const handleSurrender = () => {
         console.log("Игрок сдался");
@@ -116,22 +136,26 @@ const ChessPage = () => {
         sendMessage(messageInput);
         setMessageInput('');
     };
-    //так тут у нас в info-about-game лежит тип игры и ники игроков
+
     return (
         <div className="chess-page">
             <div className="info-about-game">
-                <a>Рейтинговая игра</a><br/>
-                <span style={{ color: '#FE6D00' }}> suhrobdomoiZ </span><a style={{ color: '#0f47ad' }}> VS </a><span style={{ color: '#FE6D00' }}> EBUHOHLOV282 </span>
+                <a>Рейтинговая игра</a><br />
+                <span style={{ color: '#FE6D00' }}> suhrobdomoiZ </span><a style={{ color: '#0f47ad' }}> VS </a><span
+                style={{ color: '#FE6D00' }}> EBUHOHLOV282 </span>
             </div>
             <div className="moves">
                 <div className="movesTitle">
                     <span>Ходы:</span>
                 </div>
-
                 <div className="movesTable">
-
-
+                    {Array.from({ length: Math.ceil(moveHistory.length / 2) }).map((_, i) => (
+                        <div key={i}>
+                            {i + 1}. {moveHistory[i * 2] || ''}{moveHistory[i * 2 + 1] ? ' | ' + moveHistory[i * 2 + 1] : ''}
+                        </div>
+                    ))}
                 </div>
+
             </div>
             <ChessBoard
                 onCellClick={handleCellClick}
@@ -144,7 +168,6 @@ const ChessPage = () => {
                 onDraw={handleDraw}
                 onNextMove={handleNextMove}
                 onPrevMove={handlePrevMove}
-
             />
         </div>
     );
