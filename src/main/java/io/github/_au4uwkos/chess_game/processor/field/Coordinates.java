@@ -19,6 +19,10 @@ public class Coordinates {
         return position;
     }
 
+    public byte toByte() {
+        return (byte) ((row + 1) * 10 + position + 1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
