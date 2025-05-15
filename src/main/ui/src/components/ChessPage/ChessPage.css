@@ -62,7 +62,7 @@
 }
 
 .CBbuttons {
-    margin-left: -27vh;
+    margin-left: -29vh;
     grid-area: buttons;
     display: flex;
     justify-content: center;
