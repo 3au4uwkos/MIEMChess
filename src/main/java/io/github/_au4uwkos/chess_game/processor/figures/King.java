@@ -6,13 +6,9 @@ import io.github._au4uwkos.chess_game.processor.field.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class King extends Figure {
+public class King extends Figure{
 
     private boolean wasUnderAttack = false;
-
-    public King(boolean isWhite, int row, int pos) {
-        super(isWhite, row, pos);
-    }
 
     public boolean isWasUnderAttack() {
         return wasUnderAttack;
@@ -22,53 +18,91 @@ public class King extends Figure {
         this.wasUnderAttack = true;
     }
 
-    @Override
-    public ArrayList<Coordinates> getPossibleMovements(Field field) {
-        ArrayList<Coordinates> moves = new ArrayList<>();
-        int[][] directions = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-
-        for (int[] direction : directions) {
-            Coordinates move = new Coordinates(getCoordinates().getRow() + direction[0], getCoordinates().getPosition() + direction[1]);
-            if (validatePosition(move)) moves.add(move);
-        }
-
-        if (!wasUnderAttack) {
-            castling(moves, field, true);
-            castling(moves, field, false);
-        }
-
-        return moves;
+    public King(boolean isWhite, int row, int pos) {
+        super(isWhite, row, pos);
     }
 
-    private void castling(ArrayList<Coordinates> moves, Field field, boolean kingside) {
-        HashMap<Coordinates, Figure> figures = field.getFigures();
-        ArrayList<Coordinates> attackPositions = isWhite() ? field.getIsUnderBlackAttack() : field.getIsUnderWhiteAttack();
-        int row = isWhite() ? 0 : 7;
-        int rookCol = kingside ? 7 : 0;
-        int[] path = kingside ? new int[]{5, 6} : new int[]{3, 2, 1};
-
-        for (int col : path) {
-            if (figures.containsKey(new Coordinates(row, col)) || attackPositions.contains(new Coordinates(row, col))) return;
+    @Override
+    public ArrayList<Coordinates> getPossibleMovements(Field field) {
+        HashMap<Coordinates,Figure> figures = field.getFigures();
+        ArrayList<Coordinates> ans = new ArrayList<>(10);
+        for(int i = -1; i  < 2; i++){
+            for(int j = -1; j < 2; j++){
+                if(Math.abs(i) + Math.abs(j) == 0) continue;
+                ans.add(new Coordinates(this.getCoordinates().getRow() + i,this.getCoordinates().getPosition()+j));
+            }
         }
-
-        Figure rook = figures.get(new Coordinates(row, rookCol));
-        if (rook instanceof Rook && !((Rook) rook).isMoved()) {
-            moves.add(new Coordinates(row, kingside ? 6 : 2));
+        if(this.isWhite()){
+            if(!this.wasUnderAttack &&
+            !figures.containsKey(new Coordinates(0,5)) &&
+            !figures.containsKey(new Coordinates(0,6)) &&
+            figures.containsKey(new Coordinates(0,7)) &&
+            !field.getIsUnderBlackAttack().contains(new Coordinates(0,5)) &&
+            !field.getIsUnderBlackAttack().contains(new Coordinates(0,6))){
+                if(figures.get(new Coordinates(0,0)).getClass() == Rook.class){
+                    Rook rook = (Rook)figures.get(new Coordinates(0,7));
+                    if(!rook.isMoved()) ans.add(new Coordinates(0,6));
+                }
+            }
+            if(!this.wasUnderAttack &&
+            !figures.containsKey(new Coordinates(0,3)) &&
+            !figures.containsKey(new Coordinates(0,2)) &&
+            !figures.containsKey(new Coordinates(0,1)) &&
+            figures.containsKey(new Coordinates(0,0)) &&
+            !field.getIsUnderBlackAttack().contains(new Coordinates(0,1)) &&
+            !field.getIsUnderBlackAttack().contains(new Coordinates(0,2)) &&
+            !field.getIsUnderBlackAttack().contains(new Coordinates(0,3)) ){
+                if(figures.get(new Coordinates(0,0)).getClass() == Rook.class){
+                    Rook rook = (Rook)figures.get(new Coordinates(0,0));
+                    if(!rook.isMoved()) ans.add(new Coordinates(0,2));
+                }
+            }
         }
+        else{
+            if(!this.wasUnderAttack &&
+                    !figures.containsKey(new Coordinates(7,5)) &&
+                    !figures.containsKey(new Coordinates(7,6)) &&
+                    figures.containsKey(new Coordinates(7,7))&&
+                    !field.getIsUnderWhiteAttack().contains(new Coordinates(7,5)) &&
+                    !field.getIsUnderWhiteAttack().contains(new Coordinates(7,6))){
+                if(figures.get(new Coordinates(7, 7)).getClass() == Rook.class) {
+                    Rook rook = (Rook) figures.get(new Coordinates(7, 7));
+                    if (!rook.isMoved()) ans.add(new Coordinates(7, 6));
+                }
+            }
+            if(!this.wasUnderAttack &&
+                    !figures.containsKey(new Coordinates(7,3)) &&
+                    !figures.containsKey(new Coordinates(7,2)) &&
+                    !figures.containsKey(new Coordinates(7,1)) &&
+                    figures.containsKey(new Coordinates(7,0))&&
+                    !field.getIsUnderWhiteAttack().contains(new Coordinates(7,1)) &&
+                    !field.getIsUnderWhiteAttack().contains(new Coordinates(7,2)) &&
+                    !field.getIsUnderWhiteAttack().contains(new Coordinates(7,3)) ){
+                if (figures.get(new Coordinates(7, 0)).getClass() == Rook.class) {
+                    Rook rook = (Rook)figures.get(new Coordinates(7,0));
+                    if(!rook.isMoved()) ans.add(new Coordinates(7,2));
+                }
+            }
+        }
+        return ans;
     }
 
     @Override
     public boolean validateMovement(Coordinates coordinates, Field field) {
-        if (!validatePosition(coordinates)) return false;
-
-        if (isWhite() && field.getIsUnderBlackAttack().contains(coordinates)) return false;
-        if (!isWhite() && field.getIsUnderWhiteAttack().contains(coordinates)) return false;
-
-        return super.validateMovement(coordinates, field);
+        if (coordinates.getRow() > 7 || coordinates.getPosition() > 7) return false;
+        if (coordinates.getRow() < 0 || coordinates.getPosition() < 0) return false;
+        if(this.isWhite() && field.getIsUnderBlackAttack().contains(coordinates)) return false;
+        if(!this.isWhite() && field.getIsUnderWhiteAttack().contains(coordinates)) return false;
+        HashMap<Coordinates,Figure> figures = field.getFigures();
+        ArrayList<Coordinates> check = this.isWhite()? field.getIsUnderBlackAttack() : field.getIsUnderWhiteAttack();
+        if(figures.containsKey(coordinates)){
+            return (figures.get(coordinates).isWhite() != this.isWhite() && figures.get(coordinates).getClass() != King.class && !check.contains(coordinates));
+        }
+        return !check.contains(coordinates);
     }
 
     @Override
     public String toString() {
-        return "" + (char) 9818;
+        return "" + (char)(9818);
     }
 }
