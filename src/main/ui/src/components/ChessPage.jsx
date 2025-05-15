@@ -142,7 +142,7 @@ const ChessPage = () => {
             <div className="info-about-game">
                 <a>Рейтинговая игра</a><br />
                 <span style={{ color: '#FE6D00' }}> suhrobdomoiZ </span><a style={{ color: '#0f47ad' }}> VS </a><span
-                style={{ color: '#FE6D00' }}> EBUHOHLOV282 </span>
+                style={{ color: '#FE6D00' }}> 3au4uwkos </span>
             </div>
             <div className="moves">
                 <div className="movesTitle">
