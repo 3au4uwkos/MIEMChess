@@ -1,7 +1,7 @@
 package io.github._au4uwkos.chess_game.controller;
 
 import io.github._au4uwkos.chess_game.model.UserEntity;
-import io.github._au4uwkos.chess_game.security.JWT.JWTGenerator;
+import io.github._au4uwkos.chess_game.security.JWT.JwtCore;
 import io.github._au4uwkos.chess_game.service.UserService;
 import io.github._au4uwkos.chess_game.transfer.AuthRequestTransfer;
 import io.github._au4uwkos.chess_game.transfer.AuthResponseTransfer;
@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 public class AuthenticationController {
 
     @Autowired
-    private JWTGenerator generator;
+    private JwtCore generator;
 
     @Autowired
     private UserService userService;
