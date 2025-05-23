@@ -1,9 +1,15 @@
 package io.github._au4uwkos.chess_game.transfer;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
+@AllArgsConstructor
 public class TokenTransfer {
 
     private String token;
+
+    public String getToken() {
+        return token.substring(7);
+    }
 }
