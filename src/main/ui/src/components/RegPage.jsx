@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useHttp } from '../hooks/useEndpoints';
 
-const RegPage = () => {
+const RegPage = ({setIsAuthenticated}) => {
     const apiBaseUrl = useHttp();
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
@@ -49,7 +49,7 @@ const RegPage = () => {
         if (hasError) return;
 
         try {
-            const response = await axios.post(`${apiBaseUrl}/api/login`, {
+            const response = await axios.post(`${apiBaseUrl}/api/signup`, {
                 username,
                 password
             });
@@ -57,7 +57,9 @@ const RegPage = () => {
             // Проверяем успешный статус (200-299)
             if (response.status >= 200 && response.status < 300) {
                 localStorage.setItem('authToken', response.data.accessToken);
-                navigate("/MainPage");
+                localStorage.setItem("username", response.data.username);
+                setIsAuthenticated = true;
+                navigate("/");
             } else {
                 setErrors({ password: "Неверный логин или пароль" });
             }

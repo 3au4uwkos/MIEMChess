@@ -6,10 +6,13 @@ import lombok.Data;
 public class AuthResponseTransfer {
 
     private String accessToken;
+    private String username;
     private final String tokenType = "Bearer ";
 
-    public AuthResponseTransfer(String accessToken) {
+    public AuthResponseTransfer(String accessToken, String username) {
+
         this.accessToken = accessToken;
+        this.username = username;
     }
 
 }

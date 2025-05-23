@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -35,10 +36,11 @@ public class JwtCore {
     }
 
     public String generateToken(String username) {
+        var now = Instant.now();
         return Jwts.builder()
                 .subject(username)
-                .issuedAt(new Date())
-                .expiration(new Date(new Date().getTime() + lifetime))
+                .issuedAt(Date.from(now))
+                .expiration(Date.from(now.plusMillis(lifetime)))
                 .signWith(this.secretKey, Jwts.SIG.HS256)
                 .compact();
     }

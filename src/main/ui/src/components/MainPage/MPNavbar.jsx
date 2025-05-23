@@ -4,6 +4,7 @@ import MPMenu from "./MPMenu";
 
 
 const MPNavbar = () => {
+    let username = localStorage.getItem("username");
     return (
         <div className="MPNavbar">
 
@@ -13,7 +14,7 @@ const MPNavbar = () => {
 
             <div className="MPNavbarProfile">
                 <img src="/img/default_user_avatar.png" alt="ProfileAvatar"/>
-                <span>Имя пользователя</span>
+                <span>{username}</span>
             </div>
             <MPMenu />
         </div>

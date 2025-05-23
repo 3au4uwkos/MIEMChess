@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useHttp } from '../hooks/useEndpoints';
 
-const AuthPage = () => {
+const AuthPage = ({setIsAuthenticated}) => {
 
     const apiBaseUrl = useHttp();
     const navigate = useNavigate();
@@ -34,7 +34,9 @@ const AuthPage = () => {
 
             if (response.status >= 200 && response.status < 300) {
                 localStorage.setItem('authToken', response.data.accessToken);
-                navigate("/MainPage");
+                localStorage.setItem("username", response.data.username);
+                setIsAuthenticated = true;
+                navigate("/");
             } else {
                 setErrors({ password: "Неверный логин или пароль" });
             }
@@ -109,7 +111,7 @@ const AuthPage = () => {
 
                     <div className="registerBlock">
                         <p className="registerText">Еще нет аккаунта?</p>
-                        <span className="registerLink" onClick={() => navigate("/Registration")}>Зарегистрироваться</span>
+                        <span className="registerLink" onClick={() => navigate("/registration")}>Зарегистрироваться</span>
                     </div>
                 </div>
             </div>
