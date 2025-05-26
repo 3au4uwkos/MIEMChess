@@ -24,6 +24,20 @@ public class MatchmakingService {
                 .flatMap(this::awaitMatch);
     }
 
+    public Mono<Boolean> removeFromQueue(String username) {
+        return Mono.fromCallable(() -> {
+                    // Удаляем все вхождения пользователя из очереди
+                    boolean removed = waitingQueue.removeIf(u -> u.equals(username));
+                    if (removed) {
+                        System.out.println("User " + username + " removed from queue");
+                    } else {
+                        System.out.println("User " + username + " not found in queue");
+                    }
+                    return removed;
+                })
+                .subscribeOn(Schedulers.boundedElastic());
+    }
+
     private void checkMatches() {
         while (waitingQueue.size() >= 2) {
             String player1 = waitingQueue.poll();
@@ -57,19 +71,11 @@ public class MatchmakingService {
         }
 
         public String getOpponentUsername(String currentUsername) {
-            return whiteUsername.equals(currentUsername) ? blackUsername : whiteUsername;
+            return getIsWhite(currentUsername) ? blackUsername : whiteUsername;
         }
 
-        public String getColor(String currentUsername) {
-            return whiteUsername.equals(currentUsername) ? "white" : "black";
-        }
-
-        public String getOpponentUsername() {
-            return blackUsername; // Для упрощения в примере
-        }
-
-        public String getColor() {
-            return whiteUsername.equals(blackUsername) ? "white" : "black"; // Для упрощения
+        public boolean getIsWhite(String currentUsername) {
+            return whiteUsername.equals(currentUsername);
         }
     }
 }

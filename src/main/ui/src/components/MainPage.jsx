@@ -4,17 +4,54 @@ import MPLeaders from "./MainPage/MPLeaders";
 import MPLastGame from "./MainPage/MPLastGame";
 import MPUserStats from "./MainPage/MPUserStats";
 import LoadingScreen from "./MainPage/LoadingScreen";
+import { useNavigate } from "react-router-dom";
 import "./MainPage/MainPage.css";
+import axios from "axios";
+import {useHttp, useWs} from '../hooks/useEndpoints';
+import ChessPage from "./ChessPage";
 
 const MainPage = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const apiBaseUrl = useHttp();
+    const { wsBaseUrl } = useWs();
+    const token = localStorage.getItem('authToken');
+    const navigate = useNavigate();
 
-    const handleFightClick = () => {
+
+    const handleFightClick = async () => {
         setIsLoading(true);
+        await axios.post(
+            `${apiBaseUrl}/game`,
+            {
+                'game': 1
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+        const socket = new WebSocket(`${wsBaseUrl}/queue`);
+
+        socket.onmessage = (event) => {
+            if (event.data.type === 'gameStart') {
+                navigate(ChessPage);
+            }
+        };
     };
 
-    const handleCancel = () => {
+    const handleCancel = async () => {
         setIsLoading(false);
+        await axios.post(
+            `${apiBaseUrl}/game`,
+            {
+                'game': 0
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
     };
 
     return (

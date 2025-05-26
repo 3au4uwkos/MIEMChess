@@ -1,6 +1,5 @@
 package io.github._au4uwkos.chess_game.security.JWT;
 
-import io.github._au4uwkos.chess_game.model.UserEntity;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -8,10 +7,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
-import reactor.core.publisher.Mono;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -47,7 +44,7 @@ public class JwtCore {
 
     public String getName(String token) {
         return Jwts.parser().verifyWith(this.secretKey).build()
-                .parseSignedClaims(token).getPayload().getSubject();
+                .parseSignedClaims(token.substring(7)).getPayload().getSubject();
     }
 
     public Authentication getAuthentication(String token) {
