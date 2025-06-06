@@ -12,38 +12,8 @@ import { useHttp } from "./hooks/useEndpoints";
 // TODO реализовать навигацию между страницами
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const apiBaseUrl = useHttp();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        const response = await axios.post(
-            `http://localhost:8080/api/validate`,
-            {
-                'token': `Bearer ${token}`
-            }
-        );
-
-        if (response.status === 200) {
-          setIsAuthenticated(true);
-        }
-      } catch (error) {
-        console.error("Ошибка проверки токена:", error);
-        localStorage.removeItem('authToken');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkAuth()
-  }, [apiBaseUrl]);
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -54,11 +24,11 @@ const App = () => {
         <Routes>
           <Route
               path="/"
-              element={isAuthenticated ? <MainPage /> : <AuthPage setIsAuthenticated={setIsAuthenticated} />}
+              element={isAuthenticated ? <MainPage/> : <AuthPage/>}
           />
           <Route path="/registration" element={<RegPage />} />
-          <Route path="/mainpage" element={isAuthenticated ? <MainPage /> : <Navigate to="/" />} />
-          <Route path="/chess" element={isAuthenticated ? <ChessPage /> : <Navigate to="/" />} />
+          <Route path="/mainpage" element=<MainPage />  />
+          <Route path="/chess" element= <ChessPage />  />
         </Routes>
       </Router>
   );

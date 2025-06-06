@@ -12,16 +12,24 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class MatchmakingService {
 
     private final Queue<String> waitingQueue = new ConcurrentLinkedQueue<>();
-    private final Sinks.Many<MatchPair> matchSink = Sinks.many().multicast().directBestEffort();
+    private final Sinks.Many<MatchPair> matchSink = Sinks.many().replay().latest();
 
     public Mono<MatchPair> addToQueue(String username) {
         return Mono.fromCallable(() -> {
                     waitingQueue.add(username);
-                    checkMatches();
                     return username;
                 })
                 .subscribeOn(Schedulers.boundedElastic())
-                .flatMap(this::awaitMatch);
+                .flatMap(user -> {
+                    // Сначала подписываемся, потом проверяем матчи
+                    Mono<MatchPair> matchMono = matchSink.asFlux()
+                            .filter(pair -> pair.contains(user))
+                            .next();
+
+                    checkMatches(); // Теперь проверяем матчи после подписки
+
+                    return matchMono;
+                });
     }
 
     public Mono<Boolean> removeFromQueue(String username) {
@@ -49,12 +57,6 @@ public class MatchmakingService {
 
             matchSink.tryEmitNext(new MatchPair(whitePlayer, blackPlayer));
         }
-    }
-
-    private Mono<MatchPair> awaitMatch(String username) {
-        return matchSink.asFlux()
-                .filter(pair -> pair.contains(username))
-                .next();
     }
 
     public static class MatchPair {

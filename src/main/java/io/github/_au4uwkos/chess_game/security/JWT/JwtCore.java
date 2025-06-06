@@ -43,6 +43,7 @@ public class JwtCore {
     }
 
     public String getName(String token) {
+        System.out.println(token);
         return Jwts.parser().verifyWith(this.secretKey).build()
                 .parseSignedClaims(token.substring(7)).getPayload().getSubject();
     }

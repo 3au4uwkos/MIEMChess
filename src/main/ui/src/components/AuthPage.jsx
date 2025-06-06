@@ -3,6 +3,7 @@ import '../AuthPage.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useHttp } from '../hooks/useEndpoints';
+import MainPage from "./MainPage";
 
 const AuthPage = ({setIsAuthenticated}) => {
 
@@ -36,7 +37,7 @@ const AuthPage = ({setIsAuthenticated}) => {
                 localStorage.setItem('authToken', response.data.accessToken);
                 localStorage.setItem("username", response.data.username);
                 setIsAuthenticated = true;
-                navigate("/");
+                navigate("/mainpage")
             } else {
                 setErrors({ password: "Неверный логин или пароль" });
             }
@@ -46,7 +47,11 @@ const AuthPage = ({setIsAuthenticated}) => {
             if (error.response) {
                 if (error.response.status === 401) {
                     setErrors({ password: "Неверный логин или пароль" });
-                } else {
+                }
+                else if (error.response.status === 400) {
+                    setErrors({ username: "Пользователь с таким именем уже существует" });
+                }
+                else {
                     setErrors({ password: "Произошла неизвестная ошибка" });
                 }
             } else if (error.request) {

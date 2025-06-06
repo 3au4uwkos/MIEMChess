@@ -15,43 +15,42 @@ const MainPage = () => {
     const apiBaseUrl = useHttp();
     const { wsBaseUrl } = useWs();
     const token = localStorage.getItem('authToken');
+    const username = localStorage.getItem('username');
     const navigate = useNavigate();
 
 
     const handleFightClick = async () => {
         setIsLoading(true);
-        await axios.post(
-            `${apiBaseUrl}/game`,
-            {
-                'game': 1
-            },
+        const response = await axios.post(
+            `${apiBaseUrl}/game?game=1&username=${username}`,
+            null,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });
-
-        const socket = new WebSocket(`${wsBaseUrl}/queue`);
-
-        socket.onmessage = (event) => {
-            if (event.data.type === 'gameStart') {
-                navigate(ChessPage);
             }
-        };
+        );
+
+        if(response.data.success){
+
+            setIsLoading(false);
+
+            navigate(ChessPage);
+
+        }
     };
 
     const handleCancel = async () => {
         setIsLoading(false);
         await axios.post(
-            `${apiBaseUrl}/game`,
-            {
-                'game': 0
-            },
+            `${apiBaseUrl}/game?game=0&username=${username}`,
+            null,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });
+            }
+        );
     };
 
     return (

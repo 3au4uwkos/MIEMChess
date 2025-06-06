@@ -27,12 +27,10 @@ public class GameController {
 
     @PostMapping("/game")
     public Mono<ResponseEntity<Map<String, Object>>> beginGame(
-            @RequestHeader Map<String, String> headers,
-            @RequestParam(value = "game") int game
+            @RequestParam(value = "game") int game,
+            @RequestParam(value = "username") String username
     ) {
-        String token = headers.get("Authorization");
 
-        String username = jwtCore.getName(token);
         return Mono.defer(() -> {
             if (game == 1) {
                 // Добавление в очередь
