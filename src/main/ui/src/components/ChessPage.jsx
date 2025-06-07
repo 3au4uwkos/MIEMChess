@@ -4,6 +4,7 @@ import './ChessPage/ChessPage.css';
 import CPbuttons from './ChessPage/CPbuttons';
 import { useWebSocket } from '../hooks/useWebSocket';
 import { useWs } from '../hooks/useEndpoints';
+import {useLocation} from "react-router-dom";
 
 const ChessPage = () => {
     const boardSize = 8;
@@ -14,6 +15,11 @@ const ChessPage = () => {
     const { wsBaseUrl } = useWs();
     const { isConnected, messages, sendMessage } = useWebSocket("ws://localhost:8080/ws/game");
     const [messageInput, setMessageInput] = useState('');
+
+    const location = useLocation();
+    const { color, opponent, gameID } = location.state || {};
+    const username = localStorage.getItem('username');
+
 
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
@@ -141,8 +147,8 @@ const ChessPage = () => {
         <div className="chess-page">
             <div className="info-about-game">
                 <a>Рейтинговая игра</a><br />
-                <span style={{ color: '#FE6D00' }}> suhrobdomoiZ </span><a style={{ color: '#0f47ad' }}> VS </a><span
-                style={{ color: '#FE6D00' }}> 3au4uwkos </span>
+                <span style={{ color: '#FE6D00' }}> {username} </span><a style={{ color: '#0f47ad' }}> VS </a><span
+                style={{ color: '#FE6D00' }}> {opponent} </span>
             </div>
             <div className="moves">
                 <div className="movesTitle">

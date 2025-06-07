@@ -31,11 +31,17 @@ const MainPage = () => {
             }
         );
 
-        if(response.data.success){
+        if(response.status === 200){
 
             setIsLoading(false);
 
-            navigate(ChessPage);
+            navigate(`/chess`, {
+                state: {
+                    color: response.data.match.color,
+                    opponent: response.data.match.opponent,
+                    gameID: response.data.match.gameID
+                }
+            });
 
         }
     };

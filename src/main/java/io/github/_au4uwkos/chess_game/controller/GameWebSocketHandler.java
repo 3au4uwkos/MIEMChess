@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github._au4uwkos.chess_game.processor.field.Coordinates;
 import io.github._au4uwkos.chess_game.processor.field.WebGame;
+import io.github._au4uwkos.chess_game.service.GameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
@@ -22,21 +24,26 @@ public class GameWebSocketHandler implements WebSocketHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GameWebSocketHandler.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final GameService gameService;
+
+    @Autowired
+    public GameWebSocketHandler(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @Override
     public Mono<Void> handle(WebSocketSession session) {
         logger.info("New WebSocket connection: {}", session.getId());
 
-        // Создаем новую игру для одного игрока
-        WebGame game = new WebGame(session.getId(), session.getId(), UUID.randomUUID().toString(), null);
-
         return session.receive()
-                .takeUntil(_ -> false)
-                .flatMap(message -> processMove(message, game, session))
-                .then();
+                .takeUntil(other -> false)
+                .publishOn(Schedulers.boundedElastic())
+                .flatMap(message -> processMove(message, session))
+                .then()
+                .doFinally(signalType -> logger.info("Connection closed: {}", session.getId()));
     }
 
-    private Mono<Void> processMove(WebSocketMessage message, WebGame game, WebSocketSession session) {
+    private Mono<Void> processMove(WebSocketMessage message, WebSocketSession session) {
         if (message.getType() != WebSocketMessage.Type.TEXT) {
             return Mono.empty();
         }
@@ -46,9 +53,11 @@ public class GameWebSocketHandler implements WebSocketHandler {
 
         try {
             JsonNode jsonNode = objectMapper.readTree(payload);
-            if (!"move".equals(jsonNode.get("type").asText())) {
-                return Mono.empty();
-            }
+
+            String gameId = jsonNode.get("gameId").asText();
+            String username = jsonNode.get("username").asText();
+
+            WebGame game = gameService.getGame(gameId).block();
 
             int fromRow = jsonNode.get("from").get("row").asInt();
             int fromCol = jsonNode.get("from").get("col").asInt();
@@ -58,9 +67,8 @@ public class GameWebSocketHandler implements WebSocketHandler {
             Coordinates from = new Coordinates(fromRow, fromCol);
             Coordinates to = new Coordinates(toRow, toCol);
 
-            // Обрабатываем ход и отправляем обновленные доступные ходы
             return game.processMove(from, to)
-                    .then(Mono.fromCallable(game::availableMovesToJSON))
+                    .then(Mono.fromCallable(() -> game.availableMovesToJSON()))
                     .flatMap(availableMoves -> session.send(
                             Mono.just(session.textMessage(
                                     String.format("{\"type\":\"moves\",\"data\":%s}", availableMoves)

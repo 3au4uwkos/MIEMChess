@@ -34,8 +34,8 @@ public class WebGame extends Game {
 
         this.whitePlayerSessionID = whitePlayerSessionID;
         this.blackPlayerSessionID = blackPlayerSessionID;
-        this.gameService = new GameService();
         this.gameId = gameId;
+        this.gameService = gameService;
         this.isWhitePlayerActive = true;
     }
 
@@ -79,51 +79,38 @@ public class WebGame extends Game {
         figures.remove(begin);
     }
 
-//    public Mono<Void> processMove(Coordinates begin, Coordinates input) throws JsonProcessingException {
-//        field.checkAttack();
-//        Field previous = new Field(field);
-//
-//        if (!isWhitePlayerActive) {
-//            if (field.getIsUnderBlackAttack().contains(whiteKing)) {
-//                if (checkmateWhite()) {
-//                    return gameService.broadcast(gameId, "finish", "{\"winner\":\"black\"}");
-//                }
-//                return gameService.sendMessage(gameId, blackPlayerSessionID, "return", "{\"reason\":\"check\"}");
-//            }
-//            if (field.getIsUnderWhiteAttack().contains(blackKing)) {
-//                return gameService.sendMessage(gameId, blackPlayerSessionID, "return", "{\"reason\":\"kingUnderAttack\"}")
-//                        .then(Mono.fromRunnable(() -> field = new Field(previous)));
-//            }
-//        } else {
-//            if (field.getIsUnderWhiteAttack().contains(blackKing)) {
-//                if (checkmateBlack()) {
-//                    return gameService.broadcast(gameId, "finish", "{\"winner\":\"white\"}");
-//                }
-//                return gameService.sendMessage(gameId, whitePlayerSessionID, "return", "{\"reason\":\"check\"}");
-//            }
-//            if (field.getIsUnderBlackAttack().contains(whiteKing)) {
-//                return gameService.sendMessage(gameId, whitePlayerSessionID, "return", "{\"reason\":\"kingUnderAttack\"}")
-//                        .then(Mono.fromRunnable(() -> field = new Field(previous)));
-//            }
-//        }
-//
-//        move(begin, input);
-//        return switchPlayer()
-//                .then(gameService.sendMessage(gameId, (isWhitePlayerActive ? whitePlayerSessionID : blackPlayerSessionID), "continue", availableMovesToJSON()));
-//
-//    }
+    public Mono<Void> processMove(Coordinates begin, Coordinates input) throws JsonProcessingException {
+        field.checkAttack();
+        Field previous = new Field(field);
 
-    public Mono<Void> processMove(Coordinates begin, Coordinates input) {
-        try {
-            field.checkAttack();
-
-            move(begin, input);
-            isWhitePlayerActive = !isWhitePlayerActive;
-
-            return Mono.empty();
-        } catch (Exception e) {
-            return Mono.error(e);
+        if (!isWhitePlayerActive) {
+            if (field.getIsUnderBlackAttack().contains(whiteKing)) {
+                if (checkmateWhite()) {
+                    return gameService.broadcast(gameId, "finish", "{\"winner\":\"black\"}");
+                }
+                return gameService.sendMessage(gameId, blackPlayerSessionID, "return", "{\"reason\":\"check\"}");
+            }
+            if (field.getIsUnderWhiteAttack().contains(blackKing)) {
+                return gameService.sendMessage(gameId, blackPlayerSessionID, "return", "{\"reason\":\"kingUnderAttack\"}")
+                        .then(Mono.fromRunnable(() -> field = new Field(previous)));
+            }
+        } else {
+            if (field.getIsUnderWhiteAttack().contains(blackKing)) {
+                if (checkmateBlack()) {
+                    return gameService.broadcast(gameId, "finish", "{\"winner\":\"white\"}");
+                }
+                return gameService.sendMessage(gameId, whitePlayerSessionID, "return", "{\"reason\":\"check\"}");
+            }
+            if (field.getIsUnderBlackAttack().contains(whiteKing)) {
+                return gameService.sendMessage(gameId, whitePlayerSessionID, "return", "{\"reason\":\"kingUnderAttack\"}")
+                        .then(Mono.fromRunnable(() -> field = new Field(previous)));
+            }
         }
+
+        move(begin, input);
+        return switchPlayer()
+                .then(gameService.sendMessage(gameId, (isWhitePlayerActive ? whitePlayerSessionID : blackPlayerSessionID), "continue", availableMovesToJSON()));
+
     }
 
     private Mono<Void> switchPlayer() {

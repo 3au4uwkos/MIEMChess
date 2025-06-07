@@ -18,8 +18,11 @@ public class ConsoleGame extends Game {
     private HashMap<Coordinates, Figure> figures;
 
     public ConsoleGame() {
-        super();
-        Scanner scanner = new Scanner(System.in);
+        whiteKing = new Coordinates(0, 4);
+        blackKing = new Coordinates(7, 4);
+        field = FieldInitializer.init();
+        figures = field.getFigures();
+        this.scanner = new Scanner(System.in);
     }
 
     public Coordinates chooseWhite() {
@@ -154,5 +157,4 @@ public class ConsoleGame extends Game {
             }
         }
     }
-
 }

@@ -1,11 +1,14 @@
 package io.github._au4uwkos.chess_game.service;
 
+import io.github._au4uwkos.chess_game.processor.field.WebGame;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.Queue;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Service
@@ -13,6 +16,12 @@ public class MatchmakingService {
 
     private final Queue<String> waitingQueue = new ConcurrentLinkedQueue<>();
     private final Sinks.Many<MatchPair> matchSink = Sinks.many().replay().latest();
+    private final GameService gameService;
+
+    @Autowired
+    public MatchmakingService(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     public Mono<MatchPair> addToQueue(String username) {
         return Mono.fromCallable(() -> {
@@ -54,6 +63,9 @@ public class MatchmakingService {
             String whitePlayer = Math.random() < 0.5 ? player1 : player2;
             assert whitePlayer != null;
             String blackPlayer = whitePlayer.equals(player1) ? player2 : player1;
+
+            String gameId = UUID.randomUUID().toString();
+            gameService.registerGame(gameId, new WebGame(whitePlayer,blackPlayer, gameId, gameService));
 
             matchSink.tryEmitNext(new MatchPair(whitePlayer, blackPlayer));
         }
